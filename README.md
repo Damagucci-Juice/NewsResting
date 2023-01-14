@@ -1,2 +1,2 @@
 # NewsResting
-Awesome project that introduce news articles.
+Awesome project that introduces news articles.
