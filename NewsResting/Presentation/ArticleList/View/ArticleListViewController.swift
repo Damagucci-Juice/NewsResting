@@ -13,5 +13,14 @@ class ArticleListViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        let repo = NewsRepositoryImpl()
+        repo.fetchNewsList(query: NewsQuery(query: "korea")) { result in
+            switch result {
+            case .success(let newsList):
+                print(newsList)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
