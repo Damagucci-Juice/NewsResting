@@ -23,22 +23,22 @@ final class NewsListViewController: UIViewController {
         view.backgroundColor = .white
         setupLayout()
         setupAttribute()
+        setupBind()
         newsListViewModel.fetchNews("apple")
     }
 }
 
-extension NewsListViewController: NewsListViewModelDelegate {
-    func completedLoad() {
-        DispatchQueue.main.async { [unowned self] in
-            self.tableView.reloadData()
-        }
-    }
-    
+extension NewsListViewController {
     
     private func setupAttribute() {
-        newsListViewModel.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func setupBind() {
+        newsListViewModel.bind { [unowned self] in
+            self.tableView.reloadData()
+        }
     }
     
     private func setupLayout() {

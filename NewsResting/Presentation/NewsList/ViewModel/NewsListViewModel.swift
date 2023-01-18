@@ -7,16 +7,12 @@
 
 import Foundation
 
-protocol NewsListViewModelDelegate {
-    func completedLoad()
-}
-
 final class NewsListViewModel {
     var newsViewModel: [NewsViewModel] = []
     
     let newsRepository: NewsRepository
     
-    var delegate: NewsListViewModelDelegate?
+    var onUpdated: () -> Void = { }
     
     init(newsRepository: NewsRepository) {
         self.newsRepository = newsRepository
@@ -29,7 +25,11 @@ extension NewsListViewModel {
         newsViewModel[index]
     }
     
-    func fetchNews(_ search: String) {
+    public func bind(_ completion: @escaping () -> Void) {
+        self.onUpdated = completion
+    }
+    
+    public func fetchNews(_ search: String) {
         let newsQuery = NewsQuery(query: search)
         newsRepository.fetchNewsList(query: newsQuery) { [unowned self] result in
             switch result {
@@ -37,9 +37,7 @@ extension NewsListViewModel {
                 self.newsViewModel = newsList.articles.map {
                     NewsViewModel(news: $0)
                 }
-                DispatchQueue.main.async {
-                    self.delegate?.completedLoad()
-                }
+                self.onUpdated()
             case .failure(let error):
                 debugPrint(error)
             }
