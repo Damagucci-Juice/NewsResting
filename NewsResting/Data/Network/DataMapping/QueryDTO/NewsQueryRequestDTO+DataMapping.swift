@@ -35,7 +35,7 @@ struct NewsQueryRequestDTO: Encodable {
         case language, sortBy, pageSize, page
     }
     
-    let query: String?
+    let query: String
     let sources: String?
     let domains: String?
     let excludeDomains: String?
@@ -45,4 +45,21 @@ struct NewsQueryRequestDTO: Encodable {
     var sortBy: SortByDTO = .publishedAt
     var pageSize: Int = 100
     var page: Int = 1
+}
+
+extension NewsQueryRequestDTO {
+    init(query: String,
+         sources: String? = nil,
+         domains: String? = nil,
+         excludeDomains: String? = nil,
+         from: String? = nil,
+         to: String? = nil
+    ) {
+        self.query = query
+        self.sources = sources
+        self.domains = domains
+        self.excludeDomains = excludeDomains
+        self.from = from
+        self.to = to
+    }
 }
