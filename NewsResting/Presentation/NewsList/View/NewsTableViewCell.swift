@@ -31,11 +31,12 @@ extension NewsTableViewCell {
         addSubview(title)
         title.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        title.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
-        title.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        title.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        title.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            title.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            title.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            title.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     func fill(_ viewModel: NewsViewModel) {
