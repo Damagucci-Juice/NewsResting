@@ -1,5 +1,5 @@
 //
-//  ArticleListViewController.swift
+//  NewsListViewController.swift
 //  NewsResting
 //
 //  Created by YEONGJIN JANG on 2023/01/14.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ArticleListViewController: UIViewController {
+class NewsListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -15,7 +15,7 @@ final class TabBarViewController: UITabBarController {
     }
     
     private func setUP() {
-        let newsVC = ArticleListViewController()
+        let newsVC = NewsListViewController()
         newsVC.tabBarItem = UITabBarItem(title: "List", image: UIImage(systemName: "list.bullet"), tag: 0)
         let newsNavi = UINavigationController(rootViewController: newsVC)
         
