@@ -7,20 +7,66 @@
 
 import UIKit
 
-class NewsListViewController: UIViewController {
+final class NewsListViewController: UIViewController {
 
+    let newsListViewModel = NewsListViewModel(newsRepository: NewsRepositoryImpl())
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(NewsTableViewCell.self,
+                           forCellReuseIdentifier: NewsTableViewCell.reusableIdentifier)
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .white
-        let repo = NewsRepositoryImpl()
-        repo.fetchNewsList(query: NewsQuery(query: "korea")) { result in
-            switch result {
-            case .success(let newsList):
-                print(newsList)
-            case .failure(let error):
-                print(error)
-            }
+        setupLayout()
+        setupAttribute()
+        newsListViewModel.fetchNews("apple")
+    }
+}
+
+extension NewsListViewController: NewsListViewModelDelegate {
+    func completedLoad() {
+        DispatchQueue.main.async { [unowned self] in
+            self.tableView.reloadData()
         }
+    }
+    
+    
+    private func setupAttribute() {
+        newsListViewModel.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    private func setupLayout() {
+        self.view.addSubview(tableView)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+    }
+}
+
+
+extension NewsListViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.newsListViewModel.newsViewModel.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.reusableIdentifier, for: indexPath) as? NewsTableViewCell else { return UITableViewCell() }
+        let vm = newsListViewModel[indexPath.row]
+        cell.fill(vm)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

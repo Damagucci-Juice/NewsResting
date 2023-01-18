@@ -10,11 +10,11 @@ import Foundation
 struct News: Equatable, Identifiable {
     var id: String? { self.source?.id }
     let source: Source?
-    let authour: String?
-    let title: String?
-    let subHeadline: String?
+    let authour: String
+    let title: String
+    let subHeadline: String
     let imageUrl: String?
-    let publishedDate: Date?
-    let content: String?
-    let originNewsPath: String?
+    let publishedDate: Date
+    let content: String
+    let originNewsPath: String
 }

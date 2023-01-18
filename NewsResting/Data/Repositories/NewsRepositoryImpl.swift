@@ -15,7 +15,9 @@ final class NewsRepositoryImpl: NewsRepository {
             let decoder = JSONDecoder()
             guard let data = data else { return }
             if let newsList = try? decoder.decode(NewsResponseDTO.self, from: data) {
-                completion(.success(newsList.toDomain()))
+                DispatchQueue.main.async {
+                    completion(.success(newsList.toDomain()))
+                }
             }
         }
         task.resume()
@@ -23,7 +25,7 @@ final class NewsRepositoryImpl: NewsRepository {
 }
 
 extension Data {
-    var prettyPrintedJSONString: NSString? { /// NSString gives us a nice sanitized debugDescription
+    var prettyPrintedJSONString: NSString? { 
         guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
               let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
               let prettyPrintedString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else { return nil }

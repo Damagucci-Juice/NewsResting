@@ -57,7 +57,14 @@ extension NewsResponseDTO {
 
 extension NewsResponseDTO.NewsDTO {
     func toDomain() -> News {
-        return News(source: self.source?.toDomain(), authour: self.authour, title: self.title, subHeadline: self.subHeadline, imageUrl: self.imageUrl, publishedDate: dateFormatter.date(from: self.publishedDate ?? ""), content: self.content, originNewsPath: self.originNewsPath)
+        return News(source: self.source?.toDomain(),
+                    authour: self.authour ?? "",
+                    title: self.title ?? "",
+                    subHeadline: self.subHeadline ?? "",
+                    imageUrl: self.imageUrl,
+                    publishedDate: dateFormatter.date(from: self.publishedDate ?? "") ?? Date(),
+                    content: self.content ?? "",
+                    originNewsPath: self.originNewsPath ?? "")
     }
 }
 
