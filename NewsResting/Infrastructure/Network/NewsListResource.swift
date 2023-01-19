@@ -31,7 +31,7 @@ extension NewsListResource: APIResource {
     }
 
     var header: [String : String] {
-        return ["apiKey": "0c4d4b75321642f78aa273d2c23d021c"]
+        return ["X-Api-Key": "0c4d4b75321642f78aa273d2c23d021c"]
     }
 
     var method: HTTPMethod {
