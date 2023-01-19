@@ -10,14 +10,8 @@ import Foundation
 final class NewsListViewModel {
     var newsViewModel: [NewsViewModel] = []
     
-    let newsRepository: NewsRepository
-    
+    private var newsRepository: NewsRepositoryImpl<NewsListResource>?
     private var onUpdated: () -> Void = { }
-    
-    init(newsRepository: NewsRepository) {
-        self.newsRepository = newsRepository
-    }
-    
 }
 
 extension NewsListViewModel {
@@ -29,22 +23,14 @@ extension NewsListViewModel {
         self.onUpdated = completion
     }
     
-    public func fetchNews(_ search: String) {
-        let newsQuery = NewsQuery(query: search)
-        do {
-            try newsRepository.fetchNewsList(query: newsQuery) { [unowned self] result in
-                switch result {
-                case .success(let newsList):
-                    self.newsViewModel = newsList.articles.map {
-                        NewsViewModel(news: $0)
-                    }
-                    self.onUpdated()
-                case .failure(let error):
-                    debugPrint(error)
-                }
-            }
-        } catch {
-            debugPrint(NetworkError.urlGeneration.localizedDescription)
+    public func fetchNews(_ search: String? = nil) {
+        let newsListResource = NewsListResource(searchKey: search)
+        let repository = NewsRepositoryImpl(resource: newsListResource)
+        self.newsRepository = repository
+        repository.excute { [weak self] dto in
+            guard let news = dto?.toDomain().articles else { return }
+            self?.newsViewModel = news.map { NewsViewModel(news: $0) }
+            self?.onUpdated()
         }
     }
     

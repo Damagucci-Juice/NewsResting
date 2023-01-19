@@ -7,20 +7,29 @@
 
 import Foundation
 
-final class NewsRepositoryImpl: NewsRepository {
-    public func fetchNewsList(query: NewsQuery, completion: @escaping (Result<NewsList, Error>) -> Void) throws {
-        let requestDTO = NewsQueryRequestDTO(query: query.query)
-        let resource = NewsListResource(searchKey: requestDTO.query)
-        let urlRequest = try resource.urlRequest()
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            let decoder = JSONDecoder()
-            guard let data = data else { return }
-            if let newsList = try? decoder.decode(NewsResponseDTO.self, from: data) {
-                DispatchQueue.main.async {
-                    completion(.success(newsList.toDomain()))
-                }
-            }
-        }
-        task.resume()
+final class NewsRepositoryImpl<Resource: APIResource> {
+    let resource: Resource
+    init(resource: Resource) {
+        self.resource = resource
     }
+}
+
+extension NewsRepositoryImpl: NetworkRequest {
+    func excute(withCompletion completion: @escaping (Resource.ModelType?) -> Void) {
+        if let urlRequest = try? resource.urlRequest() {
+            load(urlRequest, withCompletion: completion)
+        }
+    }
+    
+    func decode(_ data: Data) -> Resource.ModelType? {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        let wrapper = try? decoder.decode(Resource.ModelType.self, from: data)
+        return wrapper
+    }
+}
+
+
+struct Wrapper<T: Decodable>: Decodable {
+    let items: [T]
 }
