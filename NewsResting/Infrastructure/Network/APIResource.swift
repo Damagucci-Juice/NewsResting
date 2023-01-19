@@ -17,7 +17,7 @@ enum HTTPMethod: String {
 }
 
 protocol APIResource {
-    associatedtype ModelType
+    associatedtype ModelType: Decodable
     var baseURL: String { get }
     var path: String { get }
     var query: [String: String] { get }
@@ -43,10 +43,6 @@ extension APIResource {
     public func urlRequest() throws -> URLRequest {
         let url = try self.url()
         var urlRequest = URLRequest(url: url)
-        
-//        var allHeaders: [String: String] = [:]
-//        self.header.forEach { allHeaders.updateValue($1, forKey: $0) }
-//        urlRequest.allHTTPHeaderFields = allHeaders
         
         self.header.forEach { (key, value) in
             urlRequest.addValue(value, forHTTPHeaderField: key)
