@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NewsRepository {
-    func fetchNewsList(query: NewsQuery, completion: @escaping (Result<NewsList, Error>) -> Void)
+    func fetchNewsList(query: NewsQuery, completion: @escaping (Result<NewsList, Error>) -> Void) throws
 }
