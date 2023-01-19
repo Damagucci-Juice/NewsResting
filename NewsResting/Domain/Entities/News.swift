@@ -9,7 +9,7 @@ import Foundation
 
 struct News: Equatable, Identifiable {
     var id: String? { self.source?.id }
-    let source: Source?
+    let source: Press?
     let authour: String
     let title: String
     let subHeadline: String

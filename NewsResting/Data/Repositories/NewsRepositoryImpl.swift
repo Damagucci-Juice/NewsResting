@@ -8,12 +8,16 @@
 import Foundation
 
 final class NewsRepositoryImpl: NewsRepository {
-    public func fetchNewsList(query: NewsQuery, completion: @escaping (Result<NewsList, Error>) -> Void) {
+    public func fetchNewsList(query: NewsQuery, completion: @escaping (Result<NewsList, Error>) -> Void) throws {
         let requestDTO = NewsQueryRequestDTO(query: query.query)
-        var urlRequest = URLRequest(url: URL(string: "https://newsapi.org/v2/everything?q=\(requestDTO.query)&apiKey=0c4d4b75321642f78aa273d2c23d021c")!)
+//        var urlRequest = URLRequest(url: URL(string: "https://newsapi.org/v2/everything?q=\(requestDTO.query)&apiKey=0c4d4b75321642f78aa273d2c23d021c")!)
+        let resource = NewsListResource(searchKey: requestDTO.query)
+        let urlRequest = try resource.urlRequest()
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             let decoder = JSONDecoder()
             guard let data = data else { return }
+            print(urlRequest.allHTTPHeaderFields)
+            print(data.prettyPrintedJSONString)
             if let newsList = try? decoder.decode(NewsResponseDTO.self, from: data) {
                 DispatchQueue.main.async {
                     completion(.success(newsList.toDomain()))

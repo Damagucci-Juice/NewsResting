@@ -12,7 +12,7 @@ final class NewsListViewModel {
     
     let newsRepository: NewsRepository
     
-    var onUpdated: () -> Void = { }
+    private var onUpdated: () -> Void = { }
     
     init(newsRepository: NewsRepository) {
         self.newsRepository = newsRepository
@@ -31,20 +31,28 @@ extension NewsListViewModel {
     
     public func fetchNews(_ search: String) {
         let newsQuery = NewsQuery(query: search)
-        newsRepository.fetchNewsList(query: newsQuery) { [unowned self] result in
-            switch result {
-            case .success(let newsList):
-                self.newsViewModel = newsList.articles.map {
-                    NewsViewModel(news: $0)
+        do {
+            try newsRepository.fetchNewsList(query: newsQuery) { [unowned self] result in
+                switch result {
+                case .success(let newsList):
+                    self.newsViewModel = newsList.articles.map {
+                        NewsViewModel(news: $0)
+                    }
+                    self.onUpdated()
+                case .failure(let error):
+                    debugPrint(error)
                 }
-                self.onUpdated()
-            case .failure(let error):
-                debugPrint(error)
             }
+        } catch {
+            debugPrint(NetworkError.urlGeneration.localizedDescription)
         }
     }
     
     var cellHeight: CGFloat {
         return 85
     }
+}
+
+enum NetworkError: Error {
+    case urlGeneration
 }

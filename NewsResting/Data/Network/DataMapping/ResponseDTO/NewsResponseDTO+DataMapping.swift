@@ -69,8 +69,8 @@ extension NewsResponseDTO.NewsDTO {
 }
 
 extension NewsResponseDTO.NewsDTO.SourceDTO {
-    func toDomain() -> Source? {
-        return Source(id: self.id,
+    func toDomain() -> Press? {
+        return Press(id: self.id,
                       name: self.name)
     }
 }
