@@ -16,7 +16,8 @@ struct NewsListResource {
 }
 
 extension NewsListResource: APIResource {
-    typealias ModelType = NewsResponseDTO
+    
+    typealias ModelType = NewsList
 
     var baseURL: String {
         "https://newsapi.org/v2/"
