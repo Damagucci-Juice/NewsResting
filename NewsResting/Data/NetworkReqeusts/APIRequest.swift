@@ -7,14 +7,14 @@
 
 import Foundation
 
-final class NewsRepositoryImpl<Resource: APIResource> {
+final class APIRequest<Resource: APIResource> {
     let resource: Resource
     init(resource: Resource) {
         self.resource = resource
     }
 }
 
-extension NewsRepositoryImpl: NetworkRequest {
+extension APIRequest: NetworkRequest {
     func excute(withCompletion completion: @escaping (Resource.ModelType?) -> Void) {
         if let urlRequest = try? resource.urlRequest() {
             load(urlRequest, withCompletion: completion)
