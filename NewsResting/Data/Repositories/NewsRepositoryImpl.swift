@@ -24,12 +24,7 @@ extension NewsRepositoryImpl: NetworkRequest {
     func decode(_ data: Data) -> Resource.ModelType? {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
-        let wrapper = try? decoder.decode(Resource.ModelType.self, from: data)
-        return wrapper
+        let model = try? decoder.decode(Resource.ModelType.self, from: data)
+        return model
     }
-}
-
-
-struct Wrapper<T: Decodable>: Decodable {
-    let items: [T]
 }
