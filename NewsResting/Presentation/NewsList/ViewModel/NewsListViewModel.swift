@@ -10,7 +10,7 @@ import Foundation
 final class NewsListViewModel {
     var newsViewModel: [NewsViewModel] = []
     
-    private var newsRepository: APIRequest<NewsListResource>?
+    private var newsRequest: APIRequest<NewsListResource>?
     private var onUpdated: () -> Void = { }
 }
 
@@ -25,9 +25,9 @@ extension NewsListViewModel {
     
     public func fetchNews(_ search: String? = nil) {
         let newsListResource = NewsListResource(searchKey: search)
-        let repository = APIRequest(resource: newsListResource)
-        self.newsRepository = repository
-        repository.excute { [weak self] newsList in
+        let apiRequest = APIRequest(resource: newsListResource)
+        self.newsRequest = apiRequest
+        apiRequest.excute { [weak self] newsList in
             guard let newsList = newsList?.articles else { return }
             self?.newsViewModel = newsList.map { NewsViewModel(news: $0) }
             self?.onUpdated()
