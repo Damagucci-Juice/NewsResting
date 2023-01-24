@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct NewsList: Equatable {
-    let totalNewsCount: Int
+struct NewsList: Decodable, Equatable {
+    let totalResults: Int
     let articles: [News]
 }
 

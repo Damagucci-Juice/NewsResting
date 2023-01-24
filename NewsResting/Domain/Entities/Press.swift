@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Press Id, Press Name (언론사)
-struct Press: Equatable, Identifiable  {
+struct Press: Decodable, Equatable, Identifiable  {
     let id: String?
     let name: String?
 }

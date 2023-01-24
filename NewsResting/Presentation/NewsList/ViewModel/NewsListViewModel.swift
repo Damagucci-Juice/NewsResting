@@ -27,9 +27,9 @@ extension NewsListViewModel {
         let newsListResource = NewsListResource(searchKey: search)
         let repository = NewsRepositoryImpl(resource: newsListResource)
         self.newsRepository = repository
-        repository.excute { [weak self] dto in
-            guard let news = dto?.toDomain().articles else { return }
-            self?.newsViewModel = news.map { NewsViewModel(news: $0) }
+        repository.excute { [weak self] newsList in
+            guard let newsList = newsList?.articles else { return }
+            self?.newsViewModel = newsList.map { NewsViewModel(news: $0) }
             self?.onUpdated()
         }
     }

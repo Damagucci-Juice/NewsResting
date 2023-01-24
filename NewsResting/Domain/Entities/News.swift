@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct News: Equatable, Identifiable {
-    var id: String? { self.source?.id }
-    let source: Press?
-    let authour: String
+struct News: Decodable, Equatable, Identifiable {
+    var id: String? { self.source.id }
+    let source: Press
+    let authour: String?
     let title: String
-    let subHeadline: String
-    let imageUrl: String?
-    let publishedDate: Date
+    let description: String
+    let urlToImage: String?
+    let publishedAt: String
     let content: String
-    let originNewsPath: String
+    let url: String
 }
