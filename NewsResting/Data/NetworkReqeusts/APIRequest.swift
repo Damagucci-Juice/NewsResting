@@ -14,7 +14,7 @@ final class APIRequest<Resource: APIResource> {
     }
 }
 
-extension APIRequest: NetworkRequest {
+extension APIRequest: NetworkRequestable {
     func excute(withCompletion completion: @escaping (Resource.ModelType?) -> Void) {
         if let urlRequest = try? resource.urlRequest() {
             load(urlRequest, withCompletion: completion)
