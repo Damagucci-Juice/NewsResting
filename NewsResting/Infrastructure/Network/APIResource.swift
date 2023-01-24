@@ -7,15 +7,6 @@
 
 import Foundation
 
-enum RequestGenerationError: Error {
-    case components
-}
-
-enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
-}
-
 protocol APIResource {
     associatedtype ModelType: Decodable
     var baseURL: String { get }
