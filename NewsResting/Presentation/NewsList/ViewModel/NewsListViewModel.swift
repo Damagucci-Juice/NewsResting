@@ -24,7 +24,7 @@ extension NewsListViewModel {
     }
     
     public func fetchNews(_ search: String? = nil) {
-        let newsListResource = NewsListResource(searchKey: search)
+        let newsListResource = NewsListResource.search(key: search ?? "")
         let apiRequest = APIRequest(resource: newsListResource)
         self.newsRequest = apiRequest
         apiRequest.excute { [weak self] newsList in

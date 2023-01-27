@@ -7,12 +7,8 @@
 
 import Foundation
 
-struct NewsListResource {
-    var searchKey: String?
-    
-    init(searchKey: String? = nil) {
-        self.searchKey = searchKey
-    }
+enum NewsListResource {
+    case search(key: String)
 }
 
 extension NewsListResource: APIResource {
@@ -28,7 +24,10 @@ extension NewsListResource: APIResource {
     }
 
     var query: [String : String] {
-        return searchKey != nil ? ["q" : searchKey ?? ""] : [:]
+        switch self {
+        case .search(let key):
+            return ["q": key]
+        }
     }
 
     var header: [String : String] {
