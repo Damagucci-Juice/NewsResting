@@ -9,7 +9,7 @@ import UIKit
 
 final class NewsListViewController: UIViewController {
 
-    let newsListViewModel = NewsListViewModel()
+    let newsListViewModel = NewsListViewModel(newsRepository: NewsRepositoryImpl())
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
