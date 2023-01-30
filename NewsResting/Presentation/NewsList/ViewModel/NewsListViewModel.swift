@@ -10,8 +10,12 @@ import Foundation
 final class NewsListViewModel {
     var newsViewModel: [NewsViewModel] = []
     
-    private var newsRequest: APIRequest<NewsListResource>?
+    private var newsRepository: NewsRepository
     private var onUpdated: () -> Void = { }
+    
+    init(newsRepository: NewsRepository) {
+        self.newsRepository = newsRepository
+    }
 }
 
 extension NewsListViewModel {
@@ -23,15 +27,17 @@ extension NewsListViewModel {
         self.onUpdated = completion
     }
     
-    public func fetchNews(_ search: String? = nil) {
-        let newsListResource = NewsListResource.search(key: search ?? "")
-        let apiRequest = APIRequest(resource: newsListResource)
-        self.newsRequest = apiRequest
-        apiRequest.excute { [weak self] newsList in
-            guard let newsList = newsList?.articles else { return }
-            self?.newsViewModel = newsList.map { NewsViewModel(news: $0) }
+    public func fetchNews(_ search: String) {
+        let newsQuery = NewsQuery(query: search)
+        newsRepository.fetchNews(with: newsQuery) { [weak self] result in
+            guard let newsList = result?.articles else { return }
+            self?.newsViewModel = newsList.map { NewsViewModel(news: $0)}
             self?.onUpdated()
         }
+    }
+    
+    public func fetchNews(with category: String) {
+        
     }
     
     var cellHeight: CGFloat {
