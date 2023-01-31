@@ -1,12 +1,12 @@
 //
-//  TestCoreDataStack.swift
-//  NewsResting
+//  TestCoreDataStorage.swift
+//  NewsRestingTests
 //
 //  Created by YEONGJIN JANG on 2023/01/31.
 //
 
 import CoreData
-
+@testable import NewsResting
 
 class TestCoreDataStorage: CoreDataStorage {
     override init() {

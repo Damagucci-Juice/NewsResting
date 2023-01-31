@@ -1,14 +1,14 @@
 //
-//  NewsQueryRepositoryTests.swift
-//  NewsResting
+//  NewsRestingTests.swift
+//  NewsRestingTests
 //
 //  Created by YEONGJIN JANG on 2023/01/31.
 //
 
 import XCTest
-import CoreData
+@testable import NewsResting
 
-final class NewsQueryRepositoryTests: XCTestCase {
+final class NewsRestingTests: XCTestCase {
 
     var newsQueryRepository: NewsQueryRepository!
     var newsQueryStorage: NewsQueryStorage!
