@@ -51,29 +51,15 @@ final class NewsRestingTests: XCTestCase {
         XCTAssertEqual(fetchedQueries.first?.query, queryModel.query)
     }
     
-    //TODO: 현재 CoreData에 maxCount 보다 많이 저장이됨
     func test_Can_Store_Queires_Over_StorageLimit() async throws {
         let queries = makeFiveMockQueries()
-        let allResults = try await withThrowingTaskGroup(
-            of: NewsQuery.self,
-            returning: [NewsQuery].self,
-            body: { [unowned self] taskGroup in
-                for query in queries {
-                    taskGroup.addTask {
-                        return try await self.newsQueryRepository.saveQuery(query: query)
-                    }
-                }
-                
-                var childTaskResults = [NewsQuery]()
-                
-                for try await savedQuery in taskGroup {
-                    childTaskResults.append(savedQuery)
-                }
-                
-                return childTaskResults
-            })
-        XCTAssertEqual(allResults.count, maxCount)
-        XCTAssertNotEqual(allResults.count, queries.count)
+        // MARK: JUST SAVING
+        for query in queries {
+            let _ = try await newsQueryRepository.saveQuery(query: query)
+        }
+        let fetchedQueries = try await newsQueryRepository.fetchRecentQuery(maxCount: queries.count)
+        XCTAssertEqual(fetchedQueries.count, maxCount)
+        XCTAssertNotEqual(fetchedQueries.count, queries.count)
     }
 }
 
