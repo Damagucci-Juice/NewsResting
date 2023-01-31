@@ -29,9 +29,17 @@ final class NewsRestingTests: XCTestCase {
     }
     
     func testSaveQuery() {
-        let query = NewsQuery(query: "apple")
-        newsQueryRepository.saveQuery(query: query)
+        let queryModel = NewsQuery(query: "apple")
+        let expectation = self.expectation(description: "Saving")
+        var savedQuery: NewsQuery?
         
+        newsQueryRepository.saveQuery(query: queryModel) { query in
+            savedQuery = query
+            expectation.fulfill()
+        }
         
+        waitForExpectations(timeout: 2)
+        XCTAssertNotNil(savedQuery)
+        XCTAssertEqual(savedQuery?.query, queryModel.query)
     }
 }
