@@ -42,4 +42,30 @@ final class NewsRestingTests: XCTestCase {
         XCTAssertNotNil(savedQuery)
         XCTAssertEqual(savedQuery?.query, queryModel.query)
     }
+    
+    /// saveQuery와 fetchRecentQuery 간에 시간 순서대로 진행되어야함
+    //TODO: 시간적 직렬성을 위해 57번 라인에 sleep을 넣었는데, 없애는 방향으로 수정 필요
+    func testFetchRecentQueries() {
+        let queryModel = NewsQuery(query: "apple")
+        let savingExpectating = self.expectation(description: "Saving")
+        let fetchingExpectation = self.expectation(description: "Fetching")
+        var fetchCompleted: [NewsQuery]?
+        
+        newsQueryRepository.saveQuery(query: queryModel) { _ in
+            savingExpectating.fulfill()
+        }
+        
+        sleep(1)
+        
+        newsQueryRepository.fetchRecentQuery(maxCount: 3) { fetchedQueries in
+            fetchCompleted = fetchedQueries
+            fetchingExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 2)
+        
+        XCTAssertNotNil(fetchCompleted)
+        XCTAssertEqual(fetchCompleted?.count, 1)
+        XCTAssertEqual(fetchCompleted?.first?.query, queryModel.query)
+    }
 }
