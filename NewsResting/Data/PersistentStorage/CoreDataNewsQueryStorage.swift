@@ -36,15 +36,16 @@ extension CoreDataNewsQueryStorage: NewsQueryStorage {
         }
     }
     
-    func saveQuery(_ query: NewsQuery) {
+    func saveQuery(_ query: NewsQuery, completion: @escaping (NewsQuery?) -> Void) {
         coreDataStorage.performBackgroundTask { [weak self] context in
             guard let self = self else { return }
             do {
                 try self.cleanUpQueries(for: query, inContext: context)
-                let _ = NewsQueryEntity(newsQuery: query, insertInto: context)
+                let entity = NewsQueryEntity(newsQuery: query, insertInto: context)
                 try context.save()
+                completion(entity.toDomain())
             } catch {
-                
+                completion(nil)
             }
         }
     }
