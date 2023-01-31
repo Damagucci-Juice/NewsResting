@@ -1,1 +1,126 @@
-<mxfile host="app.diagrams.net" modified="2023-01-30T09:40:08.817Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="Eazvta7vqyVmOvSsbClh" version="20.8.13" type="github"><diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">7Vldc9o4FP0t+8BM8kDHH9iQRwxJ212ykyZt030UtrC1kS1HkgPk1/fKkrGNIYHM0t2dyUwmWOdeCemeo6tr0XMn6eojR3lyzSJMe44VrXrutOc4I3cE/xWw1oCvWgqIOYk0ZNfAHXnGBrQMWpAIi5ajZIxKkrfBkGUZDmULQ5yzZdttwWj7W3MU4w5wFyLaRe9JJBOD+t6gNnzCJE6qr7b9C21JUeVtliISFLFlA3Ive+6EMyb1U7qaYKqCVwXm/vP6ns4e/I+/fxGP6Fvwx9c/v/f1YFfHdNmsgeNMvnnob7NwkgazR+dH3L+5upo/P45p3x/qsZ8QLUzEzGLlugphzFmRGzfMJV7tIg7NK3frwNnamxCC9jBLseRr6Ldq68fIrhp1WXM4rLCkSZ9lQGR0E29GrkMDDyY6x0Rq1I3UxOmNg5wzyUJGVSsIeo5PYS7BnMNTrJ42SAVcsyeCxZcC8/Utzpkgkqn57esHs53X2BY3iUxhFVMbbIobAsIfUxJngEmWb3rs4K3JzwvS6BLUoMAb/VoKLnaINVBZocjCnjtWT1iGyS0OYWkqwBDnsxStJqxQS1UOn+HBmZS6TXOKJWGZNvQGFhYhykkWQ+vsFosCwl9x4GnWStJ63lQPcQn5aUPXOQD9mifrOyMRYH7PcUHLO6gDQpSrkJw94AmjMJQ7zVgG5mBBKN2CkKGV4oXcy7bIUQgLmJU+00GN3Bp+FMSg74KWmSwhUYShewAaRtUeVrPNGclkyZ+nFg+MTqwPnlm5F9h1G/6UO5cTlsFaEClFhZGQSyzkSRRocsJg1MkJvuV/cG1vOLoYDF1/NHC68lSMnESdQ+tVdQr0hGtxrs8eSzmVpoa8jpfndud3Yf6rwhwO/lvCtDsU4wiKJNOECCUsZhmilzUKcS+yCEcm6rXPjCk+ywPnbyzl2lR8qJAMoMZxhFdE/lDdgQ3d+qthma7MyGVjbRp6nmpyb+EDVsgKHuIDDnGJeIxfHHG0m2GOKZLkqT2/f56xbhH2Cxg7IPovlaevBn/o/j+C73by+BQvEKTbunCDj2bptsWVWJKUIp0vWSYr2uxGslRnAOZ702WYEBrN0JoVKk5CovChagUJ4+QZhkUVb2Dm0rAKSaTpcad6GkVwLMDnpmLT3oKu0arlOEMqSZYAFLcU5YLMN8tIgUKSBUxKlrb27ivZ9JgXAZNMXatb+vvWrrrTPVkCHew52dOmIG4wF0RIrAhnvHwt3RzslU9leT9yjz1y9a7cq5Lq8HxNJKc7ZL0dGtlimZKSPc1ydRthv4niFMgqs77h9GuZ4/t2h3e3y7u7g2OK5pjeqIRWVpxTrn23uH+N3rZ+SZaA6E9Ku+ccRvvoVKy/v5G+Z6Fajv6BR9XJstBo1zuoFgyEPWvR7T8W6uYyCGHRsh9qbpXueDw/s7Seqo9zraCDnFTJ01+glFDzavsJ0yespNGwi7JcUVbbyVdNg56fsmSMp6rI2dieECcIPmFPiD0uSxNlZRxYWuUWbCootvpGeN2eSvd9o+Zx6b+QDQuBsrrarFY12dIC4srEAkaqxiz3hRIA41H7+zYdYYrzBwJ91QB6q/WNXlp+c6jc4rKm3+bG8Wwd8ebDeWNaEQ6hzKgTST0v2GRIboMRETlFhiySlaeUY/1GUrWHUGbuIo1a6nxy8qsNlKoE8uIFh3ZpZbsG1Mh51U2q3gVbF7NcTYoiIVr7YpzDLIF8kE6YoCzG/QwvdXC6wdidSZcJkfgOZKDgJUf5rheuE+Sh0YHVkHf8TS006188SlvjdyP38ic=</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2023-01-31T04:59:24.194Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="Go7z5dH2RCcD_Q9R-yno" version="20.8.13" type="github">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1590" dy="1078" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-41" value="" style="group" vertex="1" connectable="0" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="100" y="90" width="1500" height="928" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-67" value="" style="group" parent="OBEdP0ZuhPgi0f2EKkzO-41" vertex="1" connectable="0">
+          <mxGeometry x="10" width="720" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-68" value="«protocol»&lt;br&gt;&lt;b&gt;MoviesQueryRepository&lt;br&gt;&lt;/b&gt;" style="html=1;verticalAlign=top;" parent="ULcCmBLq2Xg-PFFbzqAl-67" vertex="1">
+          <mxGeometry width="580" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-69" value="+  fetchRecentQueries(maxCount: Int, completion: @escaping (Result&lt;[MovieQuery], Error&gt;) -&gt; Void)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ULcCmBLq2Xg-PFFbzqAl-67" vertex="1">
+          <mxGeometry y="48" width="606.3157894736842" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-70" value="+  saveRecentQuery(query: MovieQuery, completion: @escaping (Result&lt;MovieQuery, Error&gt;) -&gt; Void)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ULcCmBLq2Xg-PFFbzqAl-67" vertex="1">
+          <mxGeometry y="74" width="606.3157894736842" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="ULcCmBLq2Xg-PFFbzqAl-67" source="ULcCmBLq2Xg-PFFbzqAl-68" target="ULcCmBLq2Xg-PFFbzqAl-68" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="OBEdP0ZuhPgi0f2EKkzO-41" source="ULcCmBLq2Xg-PFFbzqAl-73" target="ULcCmBLq2Xg-PFFbzqAl-68" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-73" value="DefaultMoviesQueriesRepository" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="OBEdP0ZuhPgi0f2EKkzO-41" vertex="1">
+          <mxGeometry y="280" width="600" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-74" value="+ moviesQueriesPersistentStorage: MoviesQueriesStorage" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ULcCmBLq2Xg-PFFbzqAl-73" vertex="1">
+          <mxGeometry y="26" width="600" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-75" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="ULcCmBLq2Xg-PFFbzqAl-73" vertex="1">
+          <mxGeometry y="52" width="600" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-79" value="+  fetchRecentQueries(maxCount: Int, completion: @escaping (Result&lt;[MovieQuery], Error&gt;) -&gt; Void)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="ULcCmBLq2Xg-PFFbzqAl-73" vertex="1">
+          <mxGeometry y="60" width="600" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ULcCmBLq2Xg-PFFbzqAl-80" value="&lt;span style=&quot;caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration: none; float: none; display: inline !important;&quot;&gt;+ &amp;nbsp;saveRecentQuery(query: MovieQuery, completion: @escaping (Result&amp;lt;MovieQuery, Error&amp;gt;) -&amp;gt; Void)&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" parent="ULcCmBLq2Xg-PFFbzqAl-73" vertex="1">
+          <mxGeometry y="86" width="600" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=classic;startFill=1;" edge="1" parent="OBEdP0ZuhPgi0f2EKkzO-41" source="ULcCmBLq2Xg-PFFbzqAl-74" target="OBEdP0ZuhPgi0f2EKkzO-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="790" y="318.66666666666674" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-1" value="«protocol»&lt;br&gt;&lt;b&gt;MoviesQueriesStorage&lt;/b&gt;" style="html=1;verticalAlign=top;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-41">
+          <mxGeometry x="827" y="254" width="563" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-2" value="   + fetchRecentsQueries(maxCount: Int, completion: @escaping (Result&lt;[MovieQuery], Error&gt;) -&gt; Void)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-41">
+          <mxGeometry x="827" y="306" width="563" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-4" value="   + saveRecentQuery(query: MovieQuery, completion: @escaping (Result&lt;MovieQuery, Error&gt;) -&gt; Void)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-41">
+          <mxGeometry x="827" y="330" width="553" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=block;endFill=0;" edge="1" parent="OBEdP0ZuhPgi0f2EKkzO-41" source="OBEdP0ZuhPgi0f2EKkzO-7" target="OBEdP0ZuhPgi0f2EKkzO-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-7" value="CoreDataMoviesQueriesStorage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-41">
+          <mxGeometry x="330" y="552" width="570" height="138" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-8" value="- maxStorageLimit: Int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-7">
+          <mxGeometry y="26" width="570" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-13" value="- coreDataStorage: CoreDataStorage" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-7">
+          <mxGeometry y="52" width="570" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-9" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-7">
+          <mxGeometry y="78" width="570" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-10" value="+ fetchRecentsQueries(maxCount: Int, completion: @escaping (Result&lt;[MovieQuery], Error&gt;) -&gt; Void)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-7">
+          <mxGeometry y="86" width="570" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-14" value="+ saveRecentQuery(query: MovieQuery, completion: @escaping (Result&lt;MovieQuery, Error&gt;) -&gt; Void)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-7">
+          <mxGeometry y="112" width="570" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=block;endFill=0;" edge="1" parent="OBEdP0ZuhPgi0f2EKkzO-41" source="OBEdP0ZuhPgi0f2EKkzO-19" target="OBEdP0ZuhPgi0f2EKkzO-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-19" value="UserDefaultsMoviesQueriesStorage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-41">
+          <mxGeometry x="950" y="552" width="550" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-20" value="- maxStorageLimit: Int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-19">
+          <mxGeometry y="26" width="550" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-26" value="- recentMoviesQueriesKey: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-19">
+          <mxGeometry y="52" width="550" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-25" value="- userDefaults: UserDefault" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-19">
+          <mxGeometry y="78" width="550" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-21" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-19">
+          <mxGeometry y="104" width="550" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-22" value="+ fetchRecentsQueries(maxCount: Int, completion: @escaping (Result&lt;[MovieQuery], Error&gt;) -&gt; Void)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-19">
+          <mxGeometry y="112" width="550" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-28" value="+ saveRecentQuery(query: MovieQuery, completion: @escaping (Result&lt;MovieQuery, Error&gt;) -&gt; Void)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-19">
+          <mxGeometry y="138" width="550" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-32" value="CoreDataStorage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-41">
+          <mxGeometry x="320" y="790" width="470" height="138" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-33" value="- static shared: self" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-32">
+          <mxGeometry y="26" width="470" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-37" value="- persistentContainer: NSPersistentContainer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-32">
+          <mxGeometry y="52" width="470" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-34" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-32">
+          <mxGeometry y="78" width="470" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-35" value="+ saveContext()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-32">
+          <mxGeometry y="86" width="470" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-38" value="+ performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -&gt; Void)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OBEdP0ZuhPgi0f2EKkzO-32">
+          <mxGeometry y="112" width="470" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="OBEdP0ZuhPgi0f2EKkzO-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;startArrow=classic;startFill=1;" edge="1" parent="OBEdP0ZuhPgi0f2EKkzO-41" source="OBEdP0ZuhPgi0f2EKkzO-13" target="OBEdP0ZuhPgi0f2EKkzO-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
