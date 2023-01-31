@@ -40,10 +40,7 @@ final class NewsRestingTests: XCTestCase {
     
     func testFetchRecentQueries() async throws {
         let queryModel = NewsQuery(query: "apple")
-        
-        //MARK: Saving
         let _: NewsQuery = try await newsQueryRepository.saveQuery(query: queryModel)
-        //MARK: Fetching
         let fetchedQueries = try await newsQueryRepository.fetchRecentQuery(maxCount: maxCount)
         
         XCTAssertNotNil(fetchedQueries)
@@ -52,31 +49,20 @@ final class NewsRestingTests: XCTestCase {
     }
     
     func test_Can_Store_Queires_Over_StorageLimit() async throws {
-        let queries = makeFiveMockQueries()
+        let queries = [
+            NewsQuery(query: "apple"),
+            NewsQuery(query: "banana"),
+            NewsQuery(query: "kiwi"),
+            NewsQuery(query: "kimch"),
+            NewsQuery(query: "IndexCard")
+        ]
         // MARK: JUST SAVING
         for query in queries {
             let _ = try await newsQueryRepository.saveQuery(query: query)
         }
         let fetchedQueries = try await newsQueryRepository.fetchRecentQuery(maxCount: queries.count)
+        
         XCTAssertEqual(fetchedQueries.count, maxCount)
         XCTAssertNotEqual(fetchedQueries.count, queries.count)
-    }
-}
-
-extension NewsRestingTests {
-    private func makeFiveMockQueries() -> [NewsQuery] {
-        let queryModel1 = NewsQuery(query: "apple")
-        let queryModel2 = NewsQuery(query: "banana")
-        let queryModel3 = NewsQuery(query: "kiwi")
-        let queryModel4 = NewsQuery(query: "kimch")
-        let queryModel5 = NewsQuery(query: "IndexCard")
-        
-        return [
-            queryModel1,
-            queryModel2,
-            queryModel3,
-            queryModel4,
-            queryModel5
-        ]
     }
 }
