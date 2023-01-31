@@ -20,8 +20,8 @@ extension NewsQueryRepositoryImpl: NewsQueryRepository {
         newsQueryStorage.fetchRecentQuries(maxCount: maxCount, completion: completion)
     }
     
-    public func saveQuery(query: NewsQuery) {
-        newsQueryStorage.saveQuery(query)
+    public func saveQuery(query: NewsQuery, completion: @escaping (NewsQuery?) -> Void) {
+        newsQueryStorage.saveQuery(query, completion: completion)
     }
 }
 
