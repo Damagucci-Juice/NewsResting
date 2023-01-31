@@ -18,7 +18,6 @@ class CoreDataStorage {
     public static let modelName = "CoreDataStorage"
 
     public static let model: NSManagedObjectModel = {
-      // swiftlint:disable force_unwrapping
       let modelURL = Bundle.main.url(forResource: modelName, withExtension: "momd")!
       return NSManagedObjectModel(contentsOf: modelURL)!
     }()
@@ -39,7 +38,6 @@ class CoreDataStorage {
         return container
     }()
 
-    // MARK: - Core Data Saving support
     func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
