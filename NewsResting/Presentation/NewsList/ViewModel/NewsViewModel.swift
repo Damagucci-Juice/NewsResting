@@ -18,9 +18,9 @@ extension NewsViewModel {
 
     var author: String { news.authour ?? "" }
     
-    var title: String { news.title }
+    var title: String { news.title ?? "" }
     
-    var subHeadLine: String { news.description }
+    var subHeadLine: String { news.description ?? ""}
 
     var imagePath: String? { news.urlToImage }
 
@@ -28,9 +28,9 @@ extension NewsViewModel {
         dateFormatter.date(from: news.publishedAt) ?? Date()
     }
     
-    var content: String { news.content }
+    var content: String { news.content ?? "" }
 
-    var originNewsPath: String { news.url }
+    var originNewsPath: String { news.url ?? "" }
 }
 
 private let dateFormatter: DateFormatter = {
