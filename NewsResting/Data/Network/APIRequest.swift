@@ -21,10 +21,14 @@ extension APIRequest: NetworkRequestable {
         }
     }
     
-    func decode(_ data: Data) -> Resource.ModelType? {
+    func decode(_ data: Data) throws -> Resource.ModelType {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
-        let model = try? decoder.decode(Resource.ModelType.self, from: data)
-        return model
+        do {
+            let model = try decoder.decode(Resource.ModelType.self, from: data)
+            return model
+        } catch {
+            throw NetworkError.decodingFailure
+        }
     }
 }
