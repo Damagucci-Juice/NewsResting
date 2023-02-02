@@ -8,8 +8,5 @@
 import Foundation
 
 enum NewsCategory: String, Hashable, CaseIterable {
-    case society
-    case sports
-    case entertain
-    case politics
+    case business, entertainment,  general, health, science, sports, technology
 }
