@@ -38,7 +38,7 @@ extension NewsListViewModel {
     }
     
     public func fetchNews(with category: NewsCategory) {
-        newsRepository.fetchNews(with: category) { [unowned self] result in
+        newsRepository.fetchNews(by: category) { [unowned self] result in
             guard let newsList = result?.articles else { return }
             newsViewModel = newsList.map { $0.toViewModel() }
             onUpdated()

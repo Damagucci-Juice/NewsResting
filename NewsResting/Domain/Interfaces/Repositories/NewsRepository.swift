@@ -9,5 +9,5 @@ import Foundation
 
 protocol NewsRepository {
     func fetchNews(with query: NewsQuery, completion: @escaping (NewsList?) -> Void)
-    func fetchNews(with category: NewsCategory, completion: @escaping (NewsList?) -> Void)
+    func fetchNews(by category: NewsCategory, completion: @escaping (NewsList?) -> Void)
 }
