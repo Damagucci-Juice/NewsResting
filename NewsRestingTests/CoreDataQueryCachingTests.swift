@@ -1,5 +1,5 @@
 //
-//  NewsRestingTests.swift
+//  CoreDataQueryCachingTests.swift
 //  NewsRestingTests
 //
 //  Created by YEONGJIN JANG on 2023/01/31.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import NewsResting
 
-final class NewsRestingTests: XCTestCase {
+final class CoreDataQueryCachingTests: XCTestCase {
     
     var newsQueryRepository: NewsQueryRepository!
     var newsQueryStorage: NewsQueryStorage!
