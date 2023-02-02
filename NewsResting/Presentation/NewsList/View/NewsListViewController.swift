@@ -24,7 +24,11 @@ final class NewsListViewController: UIViewController {
         setupLayout()
         setupAttribute()
         setupBind()
-        newsListViewModel.fetchNews("apple")
+//        newsListViewModel.fetchNews("apple")
+//        Task {
+//            let allCategories = try await newsListViewModel.fetchAllCategoryUsingConcurrency(NewsCategory.allCases)
+//            print(allCategories.count)
+//        }
     }
 }
 
