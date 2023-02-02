@@ -21,7 +21,7 @@ extension NewsRepositoryImpl: NewsRepository {
         self.apiReqeust?.excute(withCompletion: completion)
     }
     //MARK: 카테고리를 이용해 뉴스 페치(분야별 뉴스)
-    func fetchNews(with category: NewsCategory, completion: @escaping (NewsList?) -> Void) {
+    func fetchNews(by category: NewsCategory, completion: @escaping (NewsList?) -> Void) {
         let newsListResource = makeNewsListResourece(category)
         self.apiReqeust = makeNewsAPIRequest(newsListResource)
         self.apiReqeust?.excute(withCompletion: completion)
