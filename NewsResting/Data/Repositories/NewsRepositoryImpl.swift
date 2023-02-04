@@ -13,6 +13,18 @@ final class NewsRepositoryImpl {
 
 //MARK: - Public
 extension NewsRepositoryImpl: NewsRepository {
+    func fetchNews(with query: NewsQuery) async throws -> NewsList {
+        try await withCheckedThrowingContinuation { [unowned self] continuation in
+            fetchNews(with: query) { newsList in
+                if let newsList = newsList {
+                    return continuation.resume(returning: newsList)
+                } else {
+                    return continuation.resume(throwing: NetworkError.searchFetchFailure(query))
+                }
+            }
+        }
+    }
+    
     func fetchNews(by category: NewsCategory) async throws -> NewsList {
         try await withCheckedThrowingContinuation { [unowned self] continuation in
             fetchNews(by: category) { newsList in
@@ -31,12 +43,18 @@ extension NewsRepositoryImpl: NewsRepository {
         let newsListResource = makeNewsListResource(query)
         self.apiReqeust = makeNewsAPIRequest(newsListResource)
         self.apiReqeust?.excute(withCompletion: completion)
+//        Task {
+//            self.apiReqeust?.excute(withCompletion: completion)
+//        }
     }
     //MARK: 카테고리를 이용해 뉴스 페치(분야별 뉴스)
     func fetchNews(by category: NewsCategory, completion: @escaping (NewsList?) -> Void) {
         let newsListResource = makeNewsListResourece(category)
         self.apiReqeust = makeNewsAPIRequest(newsListResource)
         self.apiReqeust?.excute(withCompletion: completion)
+//        Task {
+//            self.apiReqeust?.excute(withCompletion: completion)
+//        }
     }
 }
 

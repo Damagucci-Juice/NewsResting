@@ -29,7 +29,9 @@ extension NetworkRequestable {
                     completion(value)
                 }
             } catch {
-                completion(nil)
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
             }
         }
         task.resume()
