@@ -10,75 +10,79 @@ import XCTest
 final class NewsRepositoryTests: XCTestCase {
     
     var newsRepository: NewsRepository!
-    var newsListViewModel: NewsListViewModel!
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         newsRepository = NewsRepositoryImpl()
-        newsListViewModel = NewsListViewModel(newsRepository: newsRepository)
     }
     
     override func tearDownWithError() throws {
         newsRepository = nil
-        newsListViewModel = nil
         try super.tearDownWithError()
     }
     
-    func testSearchNews() { // 1.078s
+    func testSearchNews() async throws { // 1.097s
         let newsQuery = NewsQuery(query: "banana")
-        var fetchedNews: [News]?
-        let expectation = self.expectation(description: "search banana")
-        
-        newsRepository.fetchNews(with: newsQuery) { newsList in
-            fetchedNews = newsList != nil ? newsList?.articles : nil
-            expectation.fulfill()
+        //        Task {
+        do {
+            let fetchedNews = try await newsRepository.fetchNews(with: newsQuery)
+            XCTAssertNoThrow(fetchedNews)
+        } catch {
+            throw NetworkError.searchFetchFailure(newsQuery)
         }
-        
-        waitForExpectations(timeout: 3)
-        XCTAssertNotNil(fetchedNews)
+        //        }
     }
     
-    func testFetchByCategory() { // 1.141s
-        let newsCategory = NewsCategory.technology
-        var fetchedNews: [News]?
-        let expectation = self.expectation(description: "fetch science category")
-        
-        newsRepository.fetchNews(by: newsCategory) { newsList in
-            fetchedNews = newsList != nil ? newsList?.articles : nil
-            expectation.fulfill()
+    func testFetchByCategory() async throws { // 0.524s
+        let newsCategory = NewsCategory.science
+        do {
+            let scienceNews = try await newsRepository.fetchNews(by: newsCategory)
+            XCTAssertNoThrow(scienceNews)
+        } catch {
+            throw NetworkError.categoryFetchFailure(newsCategory)
         }
-        waitForExpectations(timeout: 3)
-        XCTAssertNotNil(fetchedNews)
     }
     
-    func testFetchAllCategoryUsingSerial() async throws { // 2.857
-        let allCategory = NewsCategory.allCases
-        var newsLists = [NewsList]()
-        
-        for category in allCategory {
-            do {
-                let fetchedCategoryNewsList = try await newsRepository.fetchNews(by: category)
-                newsLists.append(fetchedCategoryNewsList)
-            } catch {
-                print(category)
-            }
-        }
-        
-        XCTAssertEqual(newsLists.count, allCategory.count)
-    }
-    
-    func testFetchAllCategoryUsingConcurrency() async throws {
+    func testFetchAllCategoryUsingConcurrency() async throws {   // Mark1. = 3.168s :: Mark2. = 1.120s
+        //MARK: - withThrowingTaskGroup
         let allCategory = NewsCategory.allCases
         let allFetchedNewsResult = try await self.fetchAllCategoryUsingConcurrency(allCategory)
+        
         XCTAssertNoThrow(allFetchedNewsResult)
         XCTAssertEqual(allCategory.count, allFetchedNewsResult.count)
     }
+    
+    //MARK: - with Task
+    func testCompletionHandlerFetchCategoryWtihTask() throws {
+        var newsList: NewsList? = nil
+        let expectation = self.expectation(description: "news")
+        try withTaskFooFunction(completion: { result in
+            newsList = result
+            expectation.fulfill()
+        })
+        
+        wait(for: [expectation], timeout: 3)
+        XCTAssertNotNil(expectation)
+    }
+    
+    //MARK: - with Completion Handler
+    func testCompletionHandlerFetchCategoryWtihoutTask() throws {
+        var newsList: NewsList? = nil
+        let expectation = self.expectation(description: "news")
+        withCompletionTaskFooFunction(completion: { result in
+            newsList = result
+            expectation.fulfill()
+        })
+        
+        wait(for: [expectation], timeout: 3)
+        XCTAssertNotNil(expectation)
+    }
 }
 
-
+// MARK: - Private
 extension NewsRepositoryTests {
-    public func fetchAllCategoryUsingConcurrency(_ allCategory: [NewsCategory]) async throws -> [NewsList?] {
-        
-        return try await withThrowingTaskGroup(of: NewsList?.self, returning: [NewsList?].self) {  taskGroup in
+    private func fetchAllCategoryUsingConcurrency(_ allCategory: [NewsCategory]) async throws -> [NewsList] {
+        return try await withThrowingTaskGroup(of: NewsList.self, returning: [NewsList].self) { taskGroup in
             
             for category in allCategory {
                 taskGroup.addTask {
@@ -86,18 +90,39 @@ extension NewsRepositoryTests {
                         let fetchOperation = try await self.newsRepository.fetchNews(by: category)
                         return fetchOperation
                     } catch {
-                        print(category)
-                        return nil
+                        throw NetworkError.categoryFetchFailure(category)
                     }
                 }
             }
             
-            var allCategoryNewsList = [NewsList?]()
+            var newsLists = [NewsList]()
             for try await newsList in taskGroup {
-                allCategoryNewsList.append(newsList)
+                newsLists.append(newsList)
             }
-            return allCategoryNewsList
+            return newsLists
         }
     }
 
+    private func withTaskFooFunction(completion: @escaping (NewsList) -> Void) throws {
+        let category = NewsCategory.science
+        Task {
+            do {
+                let newsList = try await self.newsRepository.fetchNews(by: category)
+                completion(newsList)
+            } catch {
+                throw NetworkError.categoryFetchFailure(category)
+            }
+        }
+    }
+    
+    private func withCompletionTaskFooFunction(completion: @escaping (NewsList) -> Void) {
+        let category = NewsCategory.science
+        self.newsRepository.fetchNews(by: category) { list in
+            Task {
+                if let list = list {
+                    completion(list)
+                }
+            }
+        }
+    }
 }
