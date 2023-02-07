@@ -11,6 +11,7 @@ enum CoreDataStorageError: Error {
     case readError(Error)
     case saveError(Error)
     case deleteError(Error)
+    case returnedNil
 }
 
 class CoreDataStorage {
