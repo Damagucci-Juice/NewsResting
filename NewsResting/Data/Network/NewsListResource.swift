@@ -9,9 +9,7 @@ import Foundation
 
 enum NewsListResource {
     case search(key: String)
-    case category(NewsCategory) // "https://newsapi.org/v2/top-headlines?country=kr&category=sports"
-//GET https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=0c4d4b75321642f78aa273d2c23d021c
-
+    case category(NewsCategory)
 }
 
 extension NewsListResource: APIResource {
