@@ -22,15 +22,13 @@ final class NewsRepositoryTests: XCTestCase {
     }
     
     func testSearchNews() async throws { // 1.097s
-        let newsQuery = NewsQuery(query: "banana")
-        //        Task {
+        let newsQuery = NewsQuery(query: "바나나")
         do {
             let fetchedNews = try await newsRepository.fetchNews(with: newsQuery)
             XCTAssertNoThrow(fetchedNews)
         } catch {
             throw NetworkError.searchFetchFailure(newsQuery)
         }
-        //        }
     }
     
     func testFetchByCategory() async throws { // 0.524s
