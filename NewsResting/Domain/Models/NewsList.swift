@@ -11,4 +11,3 @@ struct NewsList: Decodable, Equatable {
     let totalResults: Int
     let articles: [News]
 }
-
