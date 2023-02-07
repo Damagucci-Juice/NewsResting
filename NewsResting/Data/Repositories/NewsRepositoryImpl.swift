@@ -9,6 +9,12 @@ import Foundation
 
 final class NewsRepositoryImpl {
     private var apiReqeust: APIRequest<NewsListResource>?
+    private var responseCache: NewsResponseStorage
+    
+    init(apiReqeust: APIRequest<NewsListResource>? = nil, responseCache: NewsResponseStorage) {
+        self.apiReqeust = apiReqeust
+        self.responseCache = responseCache
+    }
 }
 
 //MARK: - Public
@@ -37,6 +43,8 @@ extension NewsRepositoryImpl: NewsRepository {
         }
     }
     
+    /// 레포지토리 앞에 UseCase 가 생겨서 처리하지 않을까? 지금처럼 NewsQuery, NewsCategory를 각각 받아서
+    /// NewsRequestDTO로 바꿔서 실행해줄것같다.
     //TODO: - 두 펑션이 파라미터만 차이가 있지 사실상 하는일은 동일하여 중복되고 있음, 개선 방안이 있을까?
     //MARK: 쿼리를 이용해 뉴스 페치
     func fetchNews(with query: NewsQuery, completion: @escaping (NewsList?) -> Void) {
