@@ -12,7 +12,7 @@ struct News: Decodable, Equatable, Identifiable {
     let source: Press
     let authour: String?
     let title: String?
-    let description: String?
+    let description: String? // MAKR: - Entity -> subTitle
     let urlToImage: String?
     let publishedAt: String
     let content: String?
