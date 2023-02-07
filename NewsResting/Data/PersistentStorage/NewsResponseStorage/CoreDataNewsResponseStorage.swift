@@ -11,24 +11,24 @@ import CoreData
 final class CoreDataNewsResponseStorage {
     private var coreDatastorage: CoreDataStorage
     
-    init(coreDatastorage: CoreDataStorage) {
+    init(coreDatastorage: CoreDataStorage = .shared) {
         self.coreDatastorage = coreDatastorage
     }
 }
 
 //MARK: - Public
 extension CoreDataNewsResponseStorage: NewsResponseStorage {
-    func getResponse(query: NewsQuery) async throws -> NewsList {
-        try await withCheckedThrowingContinuation { continuation in
-            getResponse(query: query) { result in
-                switch result {
-                case .success(let success):
-                    guard let newsList = success else {
-                        return continuation.resume(throwing: CoreDataStorageError.returnedNil) }
-                    continuation.resume(returning: newsList)
-                case .failure(let failure):
-                    continuation.resume(throwing: failure)
-                }
+
+    func getResponse(query: NewsQuery, completion: @escaping (Result<NewsList?, CoreDataStorageError>) -> Void) {
+        coreDatastorage.performBackgroundTask { context in
+            do {
+                let fetchRequest = self.fetchRequest(query: query)
+                let requset = try context.fetch(fetchRequest).first
+                
+                completion(.success(requset?.response?.toDomain()))
+            } catch {
+                completion(.failure(.readError(error)))
+
             }
         }
     }
@@ -51,22 +51,6 @@ extension CoreDataNewsResponseStorage: NewsResponseStorage {
 
 //MARK: - Private
 extension CoreDataNewsResponseStorage {
-    private func getResponse(query: NewsQuery, competion: @escaping (Result<NewsList?, CoreDataStorageError>) -> Void) {
-        coreDatastorage.performBackgroundTask { context in
-            do {
-                let fetchRequest = self.fetchRequest(query: query)
-                let requset = try context.fetch(fetchRequest).first
-                Task {
-                    competion(.success(requset?.response?.toDomain()))
-                }
-            } catch {
-                Task {
-                    competion(.failure(.readError(error)))
-                }
-            }
-        }
-    }
-    
     private func deleteResponse(query: NewsQuery, in context: NSManagedObjectContext) {
         let request = fetchRequest(query: query)
         do {

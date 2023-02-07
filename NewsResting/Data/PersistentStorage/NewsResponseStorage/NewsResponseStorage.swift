@@ -8,6 +8,6 @@
 import Foundation
 
 protocol NewsResponseStorage {
-    func getResponse(query: NewsQuery) async throws -> NewsList
+    func getResponse(query: NewsQuery, completion: @escaping (Result<NewsList?, CoreDataStorageError>) -> Void)
     func save(query: NewsQuery, response: NewsList)
 }
