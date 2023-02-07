@@ -41,7 +41,7 @@ extension CoreDataNewsQueryStorage: NewsQueryStorage {
             guard let self = self else { return }
             do {
                 try self.cleanUpQueries(for: query, inContext: context)
-                let entity = NewsQueryEntity(query, insertInto: context)
+                let entity = query.toEntity(insertInto: context)
                 try context.save()
                 completion(entity.toDomain())
             } catch {
