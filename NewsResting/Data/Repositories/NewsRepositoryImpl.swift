@@ -8,10 +8,10 @@
 import Foundation
 
 final class NewsRepositoryImpl {
-    private var apiReqeust: APIRequest<NewsListResource>?
+    private var apiReqeust: APIRequest<QueryResource>?
     private var responseCache: NewsResponseStorage
     
-    init(apiReqeust: APIRequest<NewsListResource>? = nil, responseCache: NewsResponseStorage) {
+    init(apiReqeust: APIRequest<QueryResource>? = nil, responseCache: NewsResponseStorage) {
         self.apiReqeust = apiReqeust
         self.responseCache = responseCache
     }
@@ -67,15 +67,15 @@ extension NewsRepositoryImpl: NewsRepository {
 //MARK: - Private
 extension NewsRepositoryImpl {
     //TODO: 나라별, 언론사별 Top HeadLine이 추가될 것인데, 그 때마다 make 함수가 추가될 것인가?
-    private func makeNewsListResource(_ query: NewsQuery) -> NewsListResource {
-        return NewsListResource.search(key: query.query)
+    private func makeNewsListResource(_ query: NewsQuery) -> QueryResource {
+        return QueryResource.search(key: query.query)
     }
     
-    private func makeNewsListResourece(_ category: NewsCategory) -> NewsListResource {
-        return NewsListResource.category(category)
+    private func makeNewsListResourece(_ category: NewsCategory) -> QueryResource {
+        return QueryResource.category(category)
     }
     
-    private func makeNewsAPIRequest(_ resource: NewsListResource) -> APIRequest<NewsListResource> {
+    private func makeNewsAPIRequest(_ resource: QueryResource) -> APIRequest<QueryResource> {
         return APIRequest(resource: resource)
     }
 }

@@ -19,7 +19,7 @@ protocol APIResource {
 extension APIResource {
     public func url() throws -> URL {
         let baseURL = self.baseURL.last != "/" ? self.baseURL + "/" : self.baseURL
-        let absolutePath = self.path.last != "&" ? self.path + "&" : self.path
+        let absolutePath = self.path.last != "?" ? self.path + "?" : self.path
         let endpoint = path.isEmpty ? baseURL : baseURL.appending(absolutePath)
         
         guard var urlComponents = URLComponents(string: endpoint) else { throw RequestGenerationError.components }
