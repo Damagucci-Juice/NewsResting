@@ -43,7 +43,7 @@ extension NewsQueryRepositoryImpl: NewsQueryRepository {
             }
         }
     }
-    
+    @discardableResult
     func saveQuery(query: NewsQuery) async throws -> NewsQuery {
         await withCheckedContinuation { continuation in
             saveQuery(query: query) { savedQuery in
