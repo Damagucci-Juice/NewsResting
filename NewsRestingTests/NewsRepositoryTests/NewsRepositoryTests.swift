@@ -10,13 +10,16 @@ import XCTest
 final class NewsRepositoryTests: XCTestCase {
     
     var newsRepository: NewsRepository!
+    var responseCache: NewsResponseStorage!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        newsRepository = NewsRepositoryImpl()
+        responseCache = CoreDataNewsResponseStorage()
+        newsRepository = NewsRepositoryImpl(responseCache: responseCache)
     }
     
     override func tearDownWithError() throws {
+        responseCache = nil 
         newsRepository = nil
         try super.tearDownWithError()
     }
