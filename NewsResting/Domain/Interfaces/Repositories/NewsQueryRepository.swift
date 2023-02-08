@@ -13,5 +13,6 @@ protocol NewsQueryRepository {
     func fetchRecentQuery(maxCount: Int, completion: @escaping ([NewsQuery]?) -> Void)
     func fetchRecentQuery(maxCount: Int) async throws -> [NewsQuery]
     func saveQuery(query: NewsQuery, completion: @escaping (NewsQuery?) -> Void)
+    @discardableResult
     func saveQuery(query: NewsQuery) async throws -> NewsQuery
 }
