@@ -13,4 +13,5 @@ enum NetworkError: Error {
     //TODO: - 이게 여기 있어도 되는 에러의 종류인걸까?
     case categoryFetchFailure(NewsCategory)
     case searchFetchFailure(NewsQuery)
+    case fetchQuriesFailure
 }
