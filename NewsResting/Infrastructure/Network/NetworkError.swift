@@ -16,4 +16,5 @@ enum NetworkError: Error {
     case searchFetchFailure(NewsQuery)
     case fetchQuriesFailure
     case statusCodeOutOfBound
+    case fetchCategoriesFailure
 }
