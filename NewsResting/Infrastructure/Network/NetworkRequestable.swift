@@ -11,29 +11,18 @@ protocol NetworkRequestable: AnyObject {
     associatedtype ModelType
     
     func decode(_ data: Data) throws -> ModelType
-    func excute(withCompletion completion: @escaping (ModelType?) -> Void)
+    func excute() async throws -> ModelType
 }
 
 extension NetworkRequestable {
-    func load(_ urlRequest: URLRequest, withCompletion completion: @escaping (ModelType?) -> Void) {
-        let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, _, error in
-            guard let data = data, error == nil else {
-                DispatchQueue.main.async {
-                    completion(nil)
-                }
-                return
-            }
-            do {
-                let value = try self?.decode(data)
-                DispatchQueue.main.async {
-                    completion(value)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(nil)
-                }
-            }
-        }
-        task.resume()
+    func load(_ urlRequest: URLRequest) async throws -> ModelType {
+        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest)
+        else { throw NetworkError.urlGeneration }
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
+              200..<300 ~= statusCode
+        else { throw NetworkError.statusCodeOutOfBound }
+        guard let value = try? self.decode(data)
+        else { throw NetworkError.decodingFailure }
+        return value
     }
 }
