@@ -1,5 +1,5 @@
 //
-//  NewsViewModel.swift
+//  NewsItemViewModel.swift
 //  NewsResting
 //
 //  Created by YEONGJIN JANG on 2023/01/18.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct NewsViewModel {
+struct NewsItemViewModel {
     let news: News
 }
 
-extension NewsViewModel {
+extension NewsItemViewModel {
     var id: String { news.id ?? "" }
     
     var pressName: String { news.source.name ?? "" }

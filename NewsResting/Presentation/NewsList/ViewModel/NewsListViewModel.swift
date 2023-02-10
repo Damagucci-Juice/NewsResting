@@ -8,7 +8,7 @@
 import Foundation
 
 final class NewsListViewModel {
-    var newsViewModel: [NewsViewModel] = []
+    var newsViewModel: [NewsItemViewModel] = []
     
     //TODO: - 여기 UseCase 도입하면서 완전히 바뀜 1
     private var newsRepository: NewsRepository
@@ -20,7 +20,7 @@ final class NewsListViewModel {
 }
 
 extension NewsListViewModel {
-    subscript(_ index: Int) -> NewsViewModel {
+    subscript(_ index: Int) -> NewsItemViewModel {
         newsViewModel[index]
     }
     
