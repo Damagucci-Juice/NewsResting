@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct NewsCategoryDTO: Encodable {
-    let category: String
-}
-
 struct CategoryResource {
     let newsCategoryDTO: NewsCategoryDTO
 

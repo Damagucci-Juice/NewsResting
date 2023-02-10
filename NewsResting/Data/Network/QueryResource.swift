@@ -8,20 +8,17 @@
 import Foundation
 
 struct QueryResource {
-    let newsQueryRequestDTO: NewsQueryRequestDTO
+    let newsQueryRequestDTO: NewsQueryDTO
 }
 
 extension QueryResource: APIResource {
     
     typealias ModelType = NewsList
-
-    // TODO: - UserDefault로 저장해서 할지, 아니면 나라별 탑 헤드라인을 서비스할 지 고민
     
     var baseURL: String {
         "https://newsapi.org/v2/"
     }
 
-    //TODO: - "?"를 path 뒤에 항상 처렇게 붙여줘야하는것인지, 아니면 URL Request만들 때 추가해줄 수 있는지 검토
     var path: String {
         "everything"
     }
