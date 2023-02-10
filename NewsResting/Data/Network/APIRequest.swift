@@ -15,9 +15,11 @@ final class APIRequest<Resource: APIResource> {
 }
 
 extension APIRequest: NetworkRequestable {
-    func excute(withCompletion completion: @escaping (Resource.ModelType?) -> Void) {
-        if let urlRequest = try? resource.urlRequest() {
-            load(urlRequest, withCompletion: completion)
+    func excute() async throws -> Resource.ModelType {
+        do {
+            return try await load(try resource.urlRequest())
+        } catch {
+            throw NetworkError.loadFailure
         }
     }
     
@@ -25,8 +27,7 @@ extension APIRequest: NetworkRequestable {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
         do {
-            let model = try decoder.decode(Resource.ModelType.self, from: data)
-            return model
+            return try decoder.decode(Resource.ModelType.self, from: data)
         } catch {
             throw NetworkError.decodingFailure
         }
