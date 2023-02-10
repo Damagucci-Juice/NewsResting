@@ -12,8 +12,7 @@ final class NewsRepositoryImpl {
     private var categoryRequest: APIRequest<CategoryResource>?
     private var responseCache: NewsResponseStorage
     
-    init(apiReqeust: APIRequest<QueryResource>? = nil, responseCache: NewsResponseStorage) {
-        self.queryReqeust = apiReqeust
+    init(responseCache: NewsResponseStorage) {
         self.responseCache = responseCache
     }
 }
