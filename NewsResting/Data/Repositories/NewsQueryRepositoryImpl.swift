@@ -20,21 +20,14 @@ enum QueryError: String, Error {
     case fetchError
 }
 
+//MARK: - public
 extension NewsQueryRepositoryImpl: NewsQueryRepository {
-    
-    public func fetchRecentQuery(maxCount: Int, completion: @escaping ([NewsQuery]?) -> Void) {
-        newsQueryStorage.fetchRecentQuries(maxCount: maxCount, completion: completion)
-    }
-    
-    public func saveQuery(query: NewsQuery, completion: @escaping (NewsQuery?) -> Void) {
-        newsQueryStorage.saveQuery(query, completion: completion)
-    }
     
     func fetchRecentQuery(maxCount: Int) async throws -> [NewsQuery] {
         try await withCheckedThrowingContinuation { continuation in
-            fetchRecentQuery(maxCount: maxCount) { queires in
-                if let queires = queires {
-                    continuation.resume(returning: queires)
+            newsQueryStorage.fetchRecentQuries(maxCount: maxCount) { queries in
+                if let queries = queries {
+                    continuation.resume(returning: queries)
                 } else {
                     continuation.resume(throwing:QueryError.fetchError)
                 }
@@ -44,7 +37,7 @@ extension NewsQueryRepositoryImpl: NewsQueryRepository {
     @discardableResult
     func saveQuery(query: NewsQuery) async throws -> NewsQuery {
         try await withCheckedThrowingContinuation { continuation in
-            saveQuery(query: query) { savedQuery in
+            newsQueryStorage.saveQuery(query) { savedQuery in
                 if let savedQuery = savedQuery {
                     continuation.resume(returning: savedQuery)
                 } else {
@@ -54,4 +47,3 @@ extension NewsQueryRepositoryImpl: NewsQueryRepository {
         }
     }
 }
-
