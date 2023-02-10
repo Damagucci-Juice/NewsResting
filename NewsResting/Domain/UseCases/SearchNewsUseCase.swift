@@ -21,11 +21,9 @@ protocol SearchNewsUseCase {
 
 final class SearchNewsUseCaseImpl {
     private let newsRepository: NewsRepository
-    private let queryRepository: NewsQueryRepository
     
-    init(newsRepository: NewsRepository, queryRepository: NewsQueryRepository) {
+    init(newsRepository: NewsRepository) {
         self.newsRepository = newsRepository
-        self.queryRepository = queryRepository
     }
 }
 
@@ -33,7 +31,6 @@ extension SearchNewsUseCaseImpl: SearchNewsUseCase {
     func excute(query: NewsQuery) async throws -> NewsList {
         do {
             let fetchedNewsList = try await newsRepository.fetchNews(with: query)
-            try await queryRepository.saveQuery(query: query)
             return fetchedNewsList
         } catch {
             throw NetworkError.searchFetchFailure(query)
