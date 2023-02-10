@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="NewsCategoryEntity" representedClassName="NewsCategoryEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NewsListEntity" inverseName="category" inverseEntity="NewsListEntity"/>
+    </entity>
     <entity name="NewsEntity" representedClassName="NewsEntity" syncable="YES" codeGenerationType="class">
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="content" optional="YES" attributeType="String"/>
@@ -15,6 +19,7 @@
     <entity name="NewsListEntity" representedClassName="NewsListEntity" syncable="YES" codeGenerationType="class">
         <attribute name="totalResults" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="articles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NewsEntity" inverseName="newsList" inverseEntity="NewsEntity"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NewsCategoryEntity" inverseName="response" inverseEntity="NewsCategoryEntity"/>
         <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NewsQueryEntity" inverseName="response" inverseEntity="NewsQueryEntity"/>
     </entity>
     <entity name="NewsQueryEntity" representedClassName="NewsQueryEntity" syncable="YES" codeGenerationType="class">
