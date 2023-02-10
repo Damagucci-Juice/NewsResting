@@ -20,7 +20,7 @@ struct News: Decodable, Equatable, Identifiable {
 }
 
 extension News {
-    func toViewModel() -> NewsViewModel {
+    func toViewModel() -> NewsItemViewModel {
         .init(news: self)
     }
 }

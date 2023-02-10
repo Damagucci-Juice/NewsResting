@@ -39,7 +39,7 @@ extension NewsTableViewCell {
         ])
     }
     
-    func fill(_ viewModel: NewsViewModel) {
+    func fill(_ viewModel: NewsItemViewModel) {
         self.title.text = viewModel.title
     }
     
