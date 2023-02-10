@@ -9,7 +9,16 @@ import UIKit
 
 final class NewsListViewController: UIViewController {
 
-    let newsListViewModel = NewsListViewModel(newsRepository: NewsRepositoryImpl( responseCache: CoreDataNewsResponseStorage()))
+    private let newsListViewModel: NewsListViewModel
+    
+    init(newsListViewModel: NewsListViewModel) {
+        self.newsListViewModel = newsListViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -23,12 +32,6 @@ final class NewsListViewController: UIViewController {
         view.backgroundColor = .white
         setupLayout()
         setupAttribute()
-        setupBind()
-//        newsListViewModel.fetchNews("apple")
-//        Task {
-//            let allCategories = try await newsListViewModel.fetchAllCategoryUsingConcurrency(NewsCategory.allCases)
-//            print(allCategories.count)
-//        }
     }
 }
 
@@ -37,12 +40,6 @@ extension NewsListViewController {
     private func setupAttribute() {
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    private func setupBind() {
-        newsListViewModel.bind { [unowned self] in
-            self.tableView.reloadData()
-        }
     }
     
     private func setupLayout() {
@@ -64,14 +61,14 @@ extension NewsListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.newsListViewModel.newsViewModel.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.reusableIdentifier, for: indexPath) as? NewsTableViewCell else { return UITableViewCell() }
         let vm = newsListViewModel[indexPath.row]
         cell.fill(vm)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
