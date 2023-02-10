@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FetchCategoriesUseCase {
-    func excute() async throws -> [NewsList]
+    func excute() async throws -> [NewsCategory: NewsList]
 }
 
 final class FetchCategoriesUseCaseImpl {
@@ -21,21 +21,22 @@ final class FetchCategoriesUseCaseImpl {
 
 
 extension FetchCategoriesUseCaseImpl: FetchCategoriesUseCase {
-    func excute() async throws -> [NewsList] {
-        try await withThrowingTaskGroup(of: NewsList.self) { taskGroup in
+    func excute() async throws -> [NewsCategory: NewsList] {
+        try await withThrowingTaskGroup(of: (NewsCategory, NewsList).self) { taskGroup in
             for category in NewsCategory.allCases {
                 taskGroup.addTask {
                     do {
-                        return try await self.newsRepository.fetchNews(by: category)
+                        let newsList = try await self.newsRepository.fetchNews(by: category)
+                        return (category, newsList)
                     } catch {
                         throw NetworkError.categoryFetchFailure(category)
                     }
                 }
             }
             
-            var allNewsList = [NewsList]()
-            for try await newsList in taskGroup {
-                allNewsList.append(newsList)
+            var allNewsList = [NewsCategory: NewsList]()
+            for try await categoryDict in taskGroup {
+                allNewsList[categoryDict.0] = categoryDict.1
             }
             return allNewsList
         }
