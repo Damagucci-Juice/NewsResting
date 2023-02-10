@@ -8,74 +8,62 @@
 import Foundation
 
 final class NewsRepositoryImpl {
-    private var apiReqeust: APIRequest<QueryResource>?
+    private var queryReqeust: APIRequest<QueryResource>?
+    private var categoryRequest: APIRequest<CategoryResource>?
     private var responseCache: NewsResponseStorage
     
     init(apiReqeust: APIRequest<QueryResource>? = nil, responseCache: NewsResponseStorage) {
-        self.apiReqeust = apiReqeust
+        self.queryReqeust = apiReqeust
         self.responseCache = responseCache
     }
 }
 
 //MARK: - Public
 extension NewsRepositoryImpl: NewsRepository {
-    func fetchNews(with query: NewsQuery) async throws -> NewsList {
-        try await withCheckedThrowingContinuation { [unowned self] continuation in
-            fetchNews(with: query) { newsList in
-                if let newsList = newsList {
-                    return continuation.resume(returning: newsList)
-                } else {
-                    return continuation.resume(throwing: NetworkError.searchFetchFailure(query))
-                }
-            }
-        }
-    }
     
     func fetchNews(by category: NewsCategory) async throws -> NewsList {
-        try await withCheckedThrowingContinuation { [unowned self] continuation in
-            fetchNews(by: category) { newsList in
-                if let newsList = newsList {
-                    return continuation.resume(returning: newsList)
-                } else {
-                    return continuation.resume(throwing: NetworkError.categoryFetchFailure(category))
-                }
-            }
+        let categoryRequestDTO = NewsCategoryDTO(category: category.rawValue)
+        
+        if let cached = try? await responseCache.getCategoryResponse(categoryRequestDTO) {
+            return cached
         }
+        
+        let categoryResource = CategoryResource(newsCategoryDTO: categoryRequestDTO)
+        categoryRequest = makeCategoryAPIRequest(categoryResource)
+        guard let newsList = try? await categoryRequest?.excute()
+        else { throw NetworkError.categoryFetchFailure(category) }
+        responseCache.save(categoryDTO: categoryRequestDTO, response: newsList)
+        return newsList
     }
     
-    /// 레포지토리 앞에 UseCase 가 생겨서 처리하지 않을까? 지금처럼 NewsQuery, NewsCategory를 각각 받아서
-    /// NewsRequestDTO로 바꿔서 실행해줄것같다.
     //TODO: - 두 펑션이 파라미터만 차이가 있지 사실상 하는일은 동일하여 중복되고 있음, 개선 방안이 있을까?
     //MARK: 쿼리를 이용해 뉴스 페치
-    func fetchNews(with query: NewsQuery, completion: @escaping (NewsList?) -> Void) {
-        let newsListResource = makeNewsListResource(query)
-        self.apiReqeust = makeNewsAPIRequest(newsListResource)
-        Task {
-            self.apiReqeust?.excute(withCompletion: completion)
+    func fetchNews(with query: NewsQuery) async throws -> NewsList {
+        let queryRequestDTO = NewsQueryDTO(query: query.query)
+        
+        if let cached = try? await responseCache.getSearchResponse(queryRequestDTO) {
+            return cached
         }
+        
+        let queryResource = QueryResource.init(newsQueryRequestDTO: queryRequestDTO)
+        queryReqeust = makeSearchAPIRequest(queryResource)
+        guard let newsList = try? await queryReqeust?.excute()
+        else { throw NetworkError.searchFetchFailure(query) }
+        responseCache.save(queryDTO: queryRequestDTO, response: newsList)
+        return newsList
     }
-    //MARK: 카테고리를 이용해 뉴스 페치(분야별 뉴스)
-    func fetchNews(by category: NewsCategory, completion: @escaping (NewsList?) -> Void) {
-        let newsListResource = makeNewsListResourece(category)
-        self.apiReqeust = makeNewsAPIRequest(newsListResource)
-        Task {
-            self.apiReqeust?.excute(withCompletion: completion)
-        }
-    }
+
 }
 
 //MARK: - Private
 extension NewsRepositoryImpl {
     //TODO: 나라별, 언론사별 Top HeadLine이 추가될 것인데, 그 때마다 make 함수가 추가될 것인가?
-    private func makeNewsListResource(_ query: NewsQuery) -> QueryResource {
-        return QueryResource.search(key: query.query)
+    private func makeSearchAPIRequest(_ resource: QueryResource) -> APIRequest<QueryResource> {
+        return APIRequest(resource: resource)
     }
     
-    private func makeNewsListResourece(_ category: NewsCategory) -> QueryResource {
-        return QueryResource.category(category)
-    }
-    
-    private func makeNewsAPIRequest(_ resource: QueryResource) -> APIRequest<QueryResource> {
+    private func makeCategoryAPIRequest(_ resource: CategoryResource) -> APIRequest<CategoryResource> {
         return APIRequest(resource: resource)
     }
 }
+
