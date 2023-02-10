@@ -14,7 +14,7 @@ final class CategoriesViewModel {
     init(useCase: FetchCategoriesUseCase) {
         self.useCase = useCase
         Task {
-            try await initCategoriesVM()
+            try await start()
         }
     }
 }
@@ -24,7 +24,7 @@ extension CategoriesViewModel {
         return categories[category] ?? NewsList(totalResults: 0, articles: [])
     }
     
-    func initCategoriesVM() async throws {
+    func start() async throws {
         do {
             self.categories = try await useCase.excute()
         } catch {
