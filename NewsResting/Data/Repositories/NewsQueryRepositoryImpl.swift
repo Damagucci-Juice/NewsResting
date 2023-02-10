@@ -31,26 +31,24 @@ extension NewsQueryRepositoryImpl: NewsQueryRepository {
     }
     
     func fetchRecentQuery(maxCount: Int) async throws -> [NewsQuery] {
-        await withCheckedContinuation { continuation in
+        try await withCheckedThrowingContinuation { continuation in
             fetchRecentQuery(maxCount: maxCount) { queires in
                 if let queires = queires {
                     continuation.resume(returning: queires)
                 } else {
-                    continuation.resume(throwing:
-                                            NSError(domain: QueryError.fetchError.rawValue, code: 1) as! Never
-                    )
+                    continuation.resume(throwing:QueryError.fetchError)
                 }
             }
         }
     }
     @discardableResult
     func saveQuery(query: NewsQuery) async throws -> NewsQuery {
-        await withCheckedContinuation { continuation in
+        try await withCheckedThrowingContinuation { continuation in
             saveQuery(query: query) { savedQuery in
                 if let savedQuery = savedQuery {
                     continuation.resume(returning: savedQuery)
                 } else {
-                    continuation.resume(throwing: NSError(domain: QueryError.saveError.rawValue, code: 1) as! Never)
+                    continuation.resume(throwing: QueryError.saveError)
                 }
             }
         }
