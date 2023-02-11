@@ -5,3 +5,20 @@
   Created by YEONGJIN JANG on 2023/02/11.
   
 */
+//MARK: - 일본어
+//MARK: - 뉴스 일반
+"news" = "ニュース";
+"clip" = "スクラップ";
+"refrashify" = "リロード";
+"search term" = "検索語";
+"settings" = "せってい";
+
+
+//MARK: - 카테고리별
+"business" = "ビジネス";
+"entertainment" = "エンタテイメント";
+"general" = "しゃかいめん";
+"health" = "健康";
+"science" = "サイエンス";
+"sports" = "スポーツ";
+"technology" = "テクノロジー";

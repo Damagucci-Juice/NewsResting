@@ -5,3 +5,20 @@
   Created by YEONGJIN JANG on 2023/02/11.
   
 */
+//MARK: - 한국어
+//MARK: - 뉴스 일반
+"news" = "뉴스";
+"clip" = "스크랩";
+"refrashify" = "새로고침";
+"search term" = "검색어";
+"settings" = "설정";
+
+
+//MARK: - 카테고리별
+"business" = "경제";
+"entertainment" = "연예";
+"general" = "사회";
+"health" = "건강";
+"science" = "과학";
+"sports" = "스포츠";
+"technology" = "기술";

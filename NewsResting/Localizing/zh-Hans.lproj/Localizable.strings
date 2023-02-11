@@ -5,3 +5,20 @@
   Created by YEONGJIN JANG on 2023/02/11.
   
 */
+//MARK: - 중국어 간체자
+//MARK: - 뉴스 일반
+"news" = "新闻";
+"clip" = "剪报";
+"refrashify" = "刷新";
+"search term" = "检索语。";
+"settings" = "环境";
+
+
+//MARK: - 카테고리별
+"business" = "经济。";
+"entertainment" = "演艺";
+"general" = "社会";
+"health" = "健康。";
+"science" = "科学";
+"sports" = "运动";
+"technology" = "技术";
