@@ -15,15 +15,16 @@ final class TabBarViewController: UITabBarController {
     }
     
     private func setUP() {
-//        let newsVC = NewsListViewController()
-//        newsVC.tabBarItem = UITabBarItem(title: "List", image: UIImage(systemName: "list.bullet"), tag: 0)
-//        let newsNavi = UINavigationController(rootViewController: newsVC)
+        let newsVC = CategoriesViewController()
+        let newsString = "news".localized()
+        newsVC.tabBarItem = UITabBarItem(title: newsString, image: UIImage(systemName: "list.bullet"), tag: 0)
+        let newsNavi = UINavigationController(rootViewController: newsVC)
         
         let settingsVC = SettingsViewController()
-        settingsVC.tabBarItem = UITabBarItem(title: "Setting", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+        settingsVC.tabBarItem = UITabBarItem(title: "settings".localized(), image: UIImage(systemName: "person.crop.circle"), tag: 1)
         let settingNavi = UINavigationController(rootViewController: settingsVC)
         
-//        self.viewControllers = [newsNavi, settingNavi]
-        self.viewControllers = [settingNavi]
+        self.viewControllers = [newsNavi, settingNavi]
+//        self.viewControllers = [settingNavi]
     }
 }
