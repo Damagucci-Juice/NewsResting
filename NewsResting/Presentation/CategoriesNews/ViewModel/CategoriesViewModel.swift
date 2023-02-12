@@ -8,6 +8,7 @@
 import Foundation
 
 final class CategoriesViewModel {
+    static let cellHeight: CGFloat = 40
     let useCase: FetchCategoriesUseCase
     private var categories: [NewsCategory: NewsList] = [:]
     
@@ -20,7 +21,8 @@ final class CategoriesViewModel {
 }
 
 extension CategoriesViewModel {
-    subscript(_ category: NewsCategory) -> NewsList {
+    subscript(_ index: Int) -> NewsList {
+        let category: NewsCategory = .init(rawValue: index) ?? .business
         return categories[category] ?? NewsList(totalResults: 0, articles: [])
     }
     
