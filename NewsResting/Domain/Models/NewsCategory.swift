@@ -7,6 +7,11 @@
 
 import Foundation
 
-enum NewsCategory: String, Hashable, CaseIterable {
-    case business, entertainment,  general, health, science, sports, technology
+enum NewsCategory: Int, Hashable, CaseIterable {
+    case business = 0
+    case entertainment,  general, health, science, sports, technology
+    
+    var text: String {
+        String(describing: self)
+    }
 }
