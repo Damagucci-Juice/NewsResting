@@ -95,7 +95,7 @@ extension CategoriesViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 class CategoryViewItemCell: UITableViewCell {
-    static let identifier = "CategoryViewItemCell"
+    static var identifier: String { String(describing: Self.self) }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
