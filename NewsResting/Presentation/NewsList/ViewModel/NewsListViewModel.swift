@@ -8,9 +8,11 @@
 import Foundation
 
 final class NewsListViewModel {
+    private(set) var totalResults: Int
     var newsViewModel: [NewsItemViewModel] = []
 
     init(newsList: NewsList) {
+        self.totalResults = newsList.totalResults
         newsViewModel = newsList.articles.map { $0.toViewModel() }
     }
 }
