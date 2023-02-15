@@ -12,7 +12,7 @@
 "refrashify" = "새로고침";
 "search term" = "검색어";
 "settings" = "설정";
-
+"defaultCountry" = "kr";
 
 //MARK: - 카테고리별
 "business" = "경제";

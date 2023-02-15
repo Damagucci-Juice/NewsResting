@@ -12,7 +12,7 @@
 "refrashify" = "刷新";
 "search term" = "检索语。";
 "settings" = "环境";
-
+"defaultCountry" = "cn";
 
 //MARK: - 카테고리별
 "business" = "经济。";
