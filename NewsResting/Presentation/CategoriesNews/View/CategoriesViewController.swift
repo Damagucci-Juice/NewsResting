@@ -26,6 +26,7 @@ final class CategoriesViewController: UIViewController {
         setupAttributes()
         setupLayout()
         setupBinding()
+        setupNavigation()
         Task {
             try await viewModel.start()
             tableView.reloadData()
@@ -81,6 +82,19 @@ extension CategoriesViewController {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    @objc
+    func showSearchVC() {
+        self.navigationController?.pushViewController(SearchViewController(), animated: false)
+    }
+    
+    private func setupNavigation() {
+        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .search,
+                                                         target: self,
+                                                         action: #selector(showSearchVC)),
+                                         animated: false)
+        
     }
 }
 
