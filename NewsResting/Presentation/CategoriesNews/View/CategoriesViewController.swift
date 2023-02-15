@@ -16,7 +16,7 @@ final class CategoriesViewController: UIViewController {
     private lazy var shelvesStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8
+        stackView.spacing = 4
         stackView.distribution = .equalSpacing
         return stackView
     }()
