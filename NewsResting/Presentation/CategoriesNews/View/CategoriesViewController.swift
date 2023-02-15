@@ -25,6 +25,7 @@ final class CategoriesViewController: UIViewController {
         super.viewDidLoad()
         setupAttributes()
         setupLayout()
+        setupBinding()
         Task {
             try await viewModel.start()
             tableView.reloadData()
@@ -45,10 +46,14 @@ extension CategoriesViewController {
         
         shelvesStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        NewsCategory.allCases.forEach {
+        //MARK: - 카테고리 버튼 클래스 도입 고려
+        NewsCategory.allCases.forEach { category in
             let button = UIButton()
-            button.setTitle($0.text, for: .normal)
+            button.setTitle(category.text.localized(), for: .normal)
             button.setTitleColor(.black, for: .normal)
+            button.addAction(UIAction(handler: { [unowned self] _ in
+                viewModel.setSection(category: category)
+            }), for: .touchUpInside)
             
             shelvesStackView.addArrangedSubview(button)
         }
@@ -69,22 +74,26 @@ extension CategoriesViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    private func setupBinding() {
+        viewModel.binding { [unowned self] in
+            Task {
+                self.tableView.reloadData()
+            }
+        }
+    }
 }
 
 extension CategoriesViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        NewsCategory.allCases.count
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel[section].articles.count
+        viewModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryViewItemCell.identifier, for: indexPath)
                 as? CategoryViewItemCell else { return UITableViewCell() }
-        let newsList = viewModel[indexPath.section].articles
-        cell.fillInfomation(newsList[indexPath.row].toViewModel(), sectionNumber: indexPath.section)
+        guard let newsItemViewModel = viewModel[indexPath.row] else { return UITableViewCell() }
+        cell.fillInfomation(newsItemViewModel)
         return cell 
     }
     
@@ -128,26 +137,8 @@ class CategoryViewItemCell: UITableViewCell {
         return label
     }()
     
-    func fillInfomation(_ viewModel: NewsItemViewModel, sectionNumber: Int) {
+    func fillInfomation(_ viewModel: NewsItemViewModel) {
         title.text = viewModel.title
-        var color: UIColor
-        switch sectionNumber {
-        case 0:
-            color = .yellow
-        case 1:
-            color = .brown
-        case 2:
-            color = .blue
-        case 3:
-            color = .cyan
-        case 4:
-            color = .green
-        case 5:
-            color = .gray
-        default:
-            color = .orange
-        }
-        self.backgroundColor = color
     }
     
     override func prepareForReuse() {

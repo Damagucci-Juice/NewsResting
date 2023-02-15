@@ -10,7 +10,15 @@ import Foundation
 final class CategoriesViewModel {
     static let cellHeight: CGFloat = 40
     let useCase: FetchCategoriesUseCase
-    private var categories: [NewsCategory: NewsList] = [:]
+    private var categories: [NewsCategory: NewsListViewModel] = [:]
+    
+    private(set) var currentSection: NewsListViewModel?
+    
+    private var onSectionUpdated: () -> Void = { }
+    
+    var count: Int {
+        currentSection?.newsViewModel.count ?? 0
+    }
     
     init(useCase: FetchCategoriesUseCase) {
         self.useCase = useCase
@@ -21,16 +29,32 @@ final class CategoriesViewModel {
 }
 
 extension CategoriesViewModel {
-    subscript(_ index: Int) -> NewsList {
-        let category: NewsCategory = .init(rawValue: index) ?? .business
-        return categories[category] ?? NewsList(totalResults: 0, articles: [])
+    subscript(_ offset: Int) -> NewsItemViewModel? {
+        currentSection?.newsViewModel[offset]
     }
     
     func start() async throws {
         do {
-            self.categories = try await useCase.excute()
+            let categoryDict = try await useCase.excute()
+            for (category, newsList) in categoryDict {
+                categories[category] = newsList.toViewModel()
+            }
+            setSection(category: .business)
+            onSectionUpdated()
         } catch {
             throw NetworkError.fetchCategoriesFailure
         }
+    }
+    
+    //MARK: - Input
+    func setSection(category: NewsCategory) {
+        guard let selectedNewsListViewModel = categories[category] else { return }
+        currentSection = selectedNewsListViewModel
+        onSectionUpdated()
+    }
+    
+    //MARK: - Output
+    func binding(completion: @escaping () -> Void) {
+        onSectionUpdated = completion
     }
 }
