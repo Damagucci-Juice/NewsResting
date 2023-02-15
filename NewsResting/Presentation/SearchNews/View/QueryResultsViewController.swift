@@ -7,23 +7,65 @@
 
 import UIKit
 
+
 class QueryResultsViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    private var recentQueriesViewModel: RecentQueriesViewModel
+    
+    private var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    init(recentQueriesViewModel: RecentQueriesViewModel) {
+        self.recentQueriesViewModel = recentQueriesViewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupLayout()
+        setupAttribute()
+        view.backgroundColor = .systemGray
+    }
+    
+    private func setupLayout() {
+        view.addSubview(tableView)
+        tableView.backgroundColor = .systemRed
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
+    
+    private func setupAttribute() {
+        tableView.register(QueryTableViewCell.self, forCellReuseIdentifier: QueryTableViewCell.reusableIdentifier)
+    }
+    
+    public func loadInitialQueries(_ text: String) {
+//        
+    }
+}
 
+extension QueryResultsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        recentQueriesViewModel.queries.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: QueryTableViewCell.reusableIdentifier, for: indexPath) as? QueryTableViewCell else { return UITableViewCell() }
+        let viewModel = recentQueriesViewModel.queries[indexPath.row]
+        cell.fillUp(viewModel.query)
+        return cell
+    }
+    //TODO: - Need [Query: NewsListViewModel] Dictionary
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
 }
