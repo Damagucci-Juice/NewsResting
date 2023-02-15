@@ -56,8 +56,8 @@ extension CategoriesViewController {
         shelvesStackView.backgroundColor = .red
         NSLayoutConstraint.activate([
             shelvesStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            shelvesStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            shelvesStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            shelvesStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            shelvesStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
         ])
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
