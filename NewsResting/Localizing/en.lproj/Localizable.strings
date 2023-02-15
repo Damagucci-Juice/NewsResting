@@ -12,7 +12,7 @@
 "refrashify" = "Refrashify";
 "search term" = "Search term";
 "settings" = "Settings";
-
+"defaultCountry" = "us";
 
 //MARK: - 카테고리별
 "business" = "Business";

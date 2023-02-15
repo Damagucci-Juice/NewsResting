@@ -12,7 +12,7 @@
 "refrashify" = "リロード";
 "search term" = "検索語";
 "settings" = "せってい";
-
+"defaultCountry" = "jp";
 
 //MARK: - 카테고리별
 "business" = "ビジネス";

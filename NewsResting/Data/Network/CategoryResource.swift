@@ -10,7 +10,7 @@ import Foundation
 struct CategoryResource {
     let newsCategoryDTO: NewsCategoryDTO
 
-    static let defaultCountry = "kr"
+    static let defaultCountry = "defaultCountry".localized()
 }
 
 extension CategoryResource: APIResource {
