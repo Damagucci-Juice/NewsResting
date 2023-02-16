@@ -45,7 +45,8 @@ class QueryResultsViewController: UIViewController {
     }
     
     private func setupAttribute() {
-        tableView.register(QueryTableViewCell.self, forCellReuseIdentifier: QueryTableViewCell.reusableIdentifier)
+        tableView.register(QueryTableViewCell.self,
+                           forCellReuseIdentifier: QueryTableViewCell.reusableIdentifier)
     }
     
     public func loadInitialQueries(_ text: String) {
