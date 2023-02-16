@@ -30,12 +30,12 @@ class QueryResultsViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         setupAttribute()
-        view.backgroundColor = .systemGray
+        setupBinding()
     }
     
     private func setupLayout() {
         view.addSubview(tableView)
-        tableView.backgroundColor = .systemRed
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
