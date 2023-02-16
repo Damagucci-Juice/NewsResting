@@ -16,7 +16,7 @@ final class SearchNewsViewModel {
 }
 
 extension SearchNewsViewModel {
-    func getNews(_ searchWord: String) async throws -> NewsListViewModel {
+    func fetchNewsListViewModel(_ searchWord: String) async throws -> NewsListViewModel {
         let newsQuery = NewsQuery(query: searchWord)
         let newsList = try await usecase.excute(query: newsQuery)
         return NewsListViewModel(newsList: newsList)
