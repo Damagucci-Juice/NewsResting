@@ -41,7 +41,7 @@ final class SearchNewsViewModelTest: XCTestCase {
     
     func testSearchWord() async throws {
         do {
-            let newsListViewModel = try await viewModel.getNews("korea")
+            let newsListViewModel = try await viewModel.fetchNewsListViewModel("korea")
             
             XCTAssertNoThrow(newsListViewModel)
             XCTAssertFalse(newsListViewModel.newsViewModel.isEmpty)
@@ -54,7 +54,7 @@ final class SearchNewsViewModelTest: XCTestCase {
         let words = ["color", "clock", "korea"]
         do {
             for str in words {
-                _ = try await viewModel.getNews(str)
+                _ = try await viewModel.fetchNewsListViewModel(str)
             }
             
             try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)

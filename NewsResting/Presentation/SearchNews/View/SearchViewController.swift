@@ -88,7 +88,7 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text else { return }
         Task {
-            let viewModel = try await searchNewsViewModel.getNews(searchTerm)
+            let viewModel = try await searchNewsViewModel.fetchNewsListViewModel(searchTerm)
             self.navigationController?.pushViewController(NewsListViewController(newsListViewModel: viewModel), animated: true)
         }
     }
