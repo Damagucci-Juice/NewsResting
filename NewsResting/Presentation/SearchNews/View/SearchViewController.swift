@@ -74,10 +74,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.fillUp(viewModel.query)
         return cell
     }
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
-
 }
 
 //MARK: - Public

@@ -73,8 +73,4 @@ extension QueryResultsViewController: UITableViewDelegate, UITableViewDataSource
         cell.fillUp(viewModel.query)
         return cell
     }
-    //TODO: - Need [Query: NewsListViewModel] Dictionary
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
 }
