@@ -13,7 +13,7 @@ protocol FetchRecentQueriesUseCase {
 
 final class FetchRecentQueriesUseCaseImpl {
     private var queryRepository: NewsQueryRepository
-    private var maxCount = 5
+    private var maxCount = 10
     
     init(queryRepository: NewsQueryRepository) {
         self.queryRepository = queryRepository
