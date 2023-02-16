@@ -52,8 +52,10 @@ class QueryResultsViewController: UIViewController {
     }
     
     private func setupBinding() {
-        recentQueriesViewModel.filterBind {
-            self.tableView.reloadData()
+        recentQueriesViewModel.bindingFilter { [unowned self] in
+            Task {
+                self.tableView.reloadData()
+            }
         }
     }
     
