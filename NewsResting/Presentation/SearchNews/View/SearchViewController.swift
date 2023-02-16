@@ -31,10 +31,19 @@ class SearchViewController: UIViewController {
         setupNavigation()
         setupBinding()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refrashSearchController()
+    }
 }
 
 //MARK: - Private
 extension SearchViewController {
+    private func refrashSearchController() {
+        searchController?.isActive = false
+    }
+    
     private func setupLayout() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
