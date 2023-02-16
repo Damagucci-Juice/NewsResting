@@ -51,17 +51,25 @@ class QueryResultsViewController: UIViewController {
         tableView.dataSource = self 
     }
     
+    private func setupBinding() {
+        recentQueriesViewModel.filterBind {
+            self.tableView.reloadData()
+        }
+    }
+    
+    public func filterQueries(_ text: String) {
+        recentQueriesViewModel.filterQuries(text)
     }
 }
 
 extension QueryResultsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        recentQueriesViewModel.queries.count
+        recentQueriesViewModel.filteredQueries.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: QueryTableViewCell.reusableIdentifier, for: indexPath) as? QueryTableViewCell else { return UITableViewCell() }
-        let viewModel = recentQueriesViewModel.queries[indexPath.row]
+        let viewModel = recentQueriesViewModel.filteredQueries[indexPath.row]
         cell.fillUp(viewModel.query)
         return cell
     }
