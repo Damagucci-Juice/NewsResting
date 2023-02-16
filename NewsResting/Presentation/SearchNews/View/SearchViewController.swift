@@ -29,6 +29,7 @@ class SearchViewController: UIViewController {
         setupLayout()
         setupAttribute()
         setupNavigation()
+        setupBinding()
     }
 }
 
@@ -51,6 +52,14 @@ extension SearchViewController {
         searchController?.searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func setupBinding() {
+        recentQueriesViewModel.bindingQueries { [unowned self] in
+            Task {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     private func setupNavigation() {
@@ -88,7 +97,8 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text else { return }
         Task {
-            let viewModel = try await searchNewsViewModel.fetchNewsListViewModel(searchTerm)
+            let (query, viewModel) = try await searchNewsViewModel.fetchNewsListViewModel(searchTerm)
+            recentQueriesViewModel.append(query: query, newsListViewModel: viewModel)
             self.navigationController?.pushViewController(NewsListViewController(newsListViewModel: viewModel), animated: true)
         }
     }
