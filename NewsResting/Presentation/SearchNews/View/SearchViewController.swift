@@ -86,8 +86,7 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
         guard let text = searchController.searchBar.text,
               let resultVC = searchController.searchResultsController as? QueryResultsViewController
         else { return }
-        resultVC.loadInitialQueries(text)
-        print(text)
+        resultVC.filterQueries(text)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
