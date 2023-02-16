@@ -51,8 +51,6 @@ class QueryResultsViewController: UIViewController {
         tableView.dataSource = self 
     }
     
-    public func loadInitialQueries(_ text: String) {
-//        
     }
 }
 
