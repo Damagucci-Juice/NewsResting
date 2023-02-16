@@ -10,6 +10,8 @@ import Foundation
 final class RecentQueriesViewModel {
     private let fetchRecentQueriesUseCase: FetchRecentQueriesUseCase
     private(set) var queries: [NewsQuery] = []
+    private(set) var filteredQueries: [NewsQuery] = []
+    private var onFilterUpdated: () -> Void = { }
     
     init(fetchRecentQueriesUseCase: FetchRecentQueriesUseCase) {
         self.fetchRecentQueriesUseCase = fetchRecentQueriesUseCase
@@ -26,5 +28,16 @@ extension RecentQueriesViewModel {
         } catch {
             throw NetworkError.fetchQuriesFailure
         }
+    }
+    
+    func filterQuries(_ text: String)  {
+        filteredQueries = queries.filter {
+            $0.query.contains(text)
+        }
+        onFilterUpdated()
+    }
+    
+    func filterBind(completion: @escaping () -> Void) {
+        onFilterUpdated = completion
     }
 }
