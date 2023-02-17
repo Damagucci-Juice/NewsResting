@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="NewsCategoryEntity" representedClassName="NewsCategoryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="category" optional="YES" attributeType="String"/>
-        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NewsListEntity" inverseName="category" inverseEntity="NewsListEntity"/>
+        <relationship name="response" maxCount="1" deletionRule="Cascade" destinationEntity="NewsListEntity" inverseName="category" inverseEntity="NewsListEntity"/>
     </entity>
     <entity name="NewsEntity" representedClassName="NewsEntity" syncable="YES" codeGenerationType="class">
         <attribute name="author" optional="YES" attributeType="String"/>
@@ -25,6 +25,6 @@
     <entity name="NewsQueryEntity" representedClassName="NewsQueryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="query" optional="YES" attributeType="String"/>
-        <relationship name="response" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="NewsListEntity" inverseName="request" inverseEntity="NewsListEntity"/>
+        <relationship name="response" maxCount="1" deletionRule="Cascade" destinationEntity="NewsListEntity" inverseName="request" inverseEntity="NewsListEntity"/>
     </entity>
 </model>
