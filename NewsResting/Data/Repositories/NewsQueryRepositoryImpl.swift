@@ -23,7 +23,7 @@ enum QueryError: String, Error {
 //MARK: - public
 extension NewsQueryRepositoryImpl: NewsQueryRepository {
     
-    func fetchRecentQuery(maxCount: Int) async throws -> [NewsQuery] {
+    func fetchRecentQuery(maxCount: Int) async throws -> [(NewsQuery, NewsList)] {
         try await withCheckedThrowingContinuation { continuation in
             newsQueryStorage.fetchRecentQuries(maxCount: maxCount) { queries in
                 if let queries = queries {
@@ -35,9 +35,9 @@ extension NewsQueryRepositoryImpl: NewsQueryRepository {
         }
     }
     @discardableResult
-    func saveQuery(query: NewsQuery) async throws -> NewsQuery {
+    func saveQuery(query: NewsQuery, newsList: NewsList) async throws -> (NewsQuery, NewsList) {
         try await withCheckedThrowingContinuation { continuation in
-            newsQueryStorage.saveQuery(query) { savedQuery in
+            newsQueryStorage.saveQuery(query, newsList: newsList) { savedQuery in
                 if let savedQuery = savedQuery {
                     continuation.resume(returning: savedQuery)
                 } else {
