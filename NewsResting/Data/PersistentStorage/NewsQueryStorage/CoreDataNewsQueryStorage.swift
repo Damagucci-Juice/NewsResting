@@ -20,30 +20,45 @@ final class CoreDataNewsQueryStorage {
 
 // MARK: Public
 extension CoreDataNewsQueryStorage: NewsQueryStorage {
+       
     //TODO: - 결과 타입 Result로 리펙터링
-    func fetchRecentQuries(maxCount: Int, completion: @escaping ([NewsQuery]?) -> Void) {
+    func fetchRecentQuries(maxCount: Int, completion: @escaping ([(NewsQuery, NewsList)]?) -> Void) {
         coreDataStorage.performBackgroundTask { context in
             do {
                 let request: NSFetchRequest = NewsQueryEntity.fetchRequest()
                 request.sortDescriptors = [NSSortDescriptor(key: #keyPath(NewsQueryEntity.createdAt),
                                                             ascending: false)]
                 request.fetchLimit = maxCount
-                let result = try context.fetch(request).map { $0.toDomain() }
-                completion(result)
+                let result = try context.fetch(request)
+                let newsQueries = result.map { queryEntity in
+                    queryEntity.toDomain()
+                }
+                let newsLists = result.compactMap { $0.response }.map { $0.toDomain() }
+                if newsQueries.count == newsLists.count {
+                    var tuple = [(NewsQuery, NewsList)]()
+                    for i in 0..<newsQueries.count {
+                        tuple.append((newsQueries[i], newsLists[i]))
+                    }
+                    completion(tuple)
+                } else {
+                    completion(nil)
+                }
             } catch {
                 completion(nil)
             }
         }
     }
     
-    func saveQuery(_ query: NewsQuery, completion: @escaping (NewsQuery?) -> Void) {
+    func saveQuery(_ query: NewsQuery, newsList: NewsList, completion: @escaping ((NewsQuery, NewsList)?) -> Void) {
         coreDataStorage.performBackgroundTask { [weak self] context in
             guard let self = self else { return }
             do {
                 try self.cleanUpQueries(for: query, inContext: context)
-                let entity = query.toEntity(insertInto: context)
+                let queryEntity = query.toEntity(insertInto: context)
+                let newsListEntity = newsList.toEntity(insertInto: context)
+                queryEntity.response = newsListEntity
                 try context.save()
-                completion(entity.toDomain())
+                completion((query, newsList))
             } catch {
                 completion(nil)
             }
