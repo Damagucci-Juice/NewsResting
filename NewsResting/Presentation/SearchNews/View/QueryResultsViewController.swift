@@ -75,4 +75,8 @@ extension QueryResultsViewController: UITableViewDelegate, UITableViewDataSource
         cell.fillUp(query.query)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        recentQueriesViewModel.cellTapped(indexPath.row, isFiltered: true)
+    }
 }
