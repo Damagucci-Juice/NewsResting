@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FetchRecentQueriesUseCase {
-    func excute() async throws -> [NewsQuery]
+    func excute() async throws -> [(NewsQuery, NewsList)]
 }
 
 final class FetchRecentQueriesUseCaseImpl {
@@ -21,7 +21,7 @@ final class FetchRecentQueriesUseCaseImpl {
 }
 
 extension FetchRecentQueriesUseCaseImpl: FetchRecentQueriesUseCase {
-    func excute() async throws -> [NewsQuery] {
+    func excute() async throws -> [(NewsQuery, NewsList)] {
         do {
             return try await queryRepository.fetchRecentQuery(maxCount: maxCount)
         } catch {
