@@ -83,13 +83,13 @@ extension SearchViewController {
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        recentQueriesViewModel.queries.count
+        recentQueriesViewModel.queriesAndViewModel.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: QueryTableViewCell.reusableIdentifier, for: indexPath) as? QueryTableViewCell else { return UITableViewCell() }
-        let viewModel = recentQueriesViewModel.queries[indexPath.row]
-        cell.fillUp(viewModel.query)
+        let (query, _) = recentQueriesViewModel.queriesAndViewModel[indexPath.row]
+        cell.fillUp(query.query)
         return cell
     }
 }

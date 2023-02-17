@@ -71,8 +71,8 @@ extension QueryResultsViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: QueryTableViewCell.reusableIdentifier, for: indexPath) as? QueryTableViewCell else { return UITableViewCell() }
-        let viewModel = recentQueriesViewModel.filteredQueries[indexPath.row]
-        cell.fillUp(viewModel.query)
+        let (query, _) = recentQueriesViewModel.filteredQueries[indexPath.row]
+        cell.fillUp(query.query)
         return cell
     }
 }
