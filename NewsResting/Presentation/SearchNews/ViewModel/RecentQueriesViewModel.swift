@@ -9,12 +9,12 @@ import Foundation
 
 final class RecentQueriesViewModel {
     private let fetchRecentQueriesUseCase: FetchRecentQueriesUseCase
-    private(set) var queries: [NewsQuery] = [] {
+    private(set) var queriesAndViewModel: [(NewsQuery, NewsListViewModel)] = [] {
         didSet {
             onQueriesUpdated()
         }
     }
-    private(set) var filteredQueries: [NewsQuery] = [] {
+    private(set) var filteredQueries: [(NewsQuery, NewsListViewModel)] = [] {
         didSet {
             onFilterUpdated()
         }
@@ -35,15 +35,17 @@ final class RecentQueriesViewModel {
 extension RecentQueriesViewModel {
     private func fetchQuereis() async throws {
         do {
-            queries = try await fetchRecentQueriesUseCase.excute()
+            queriesAndViewModel = try await fetchRecentQueriesUseCase.excute().map {
+                return ($0.0, $0.1.toViewModel())
+            }
         } catch {
             throw NetworkError.fetchQuriesFailure
         }
     }
     
     func filterQuries(_ text: String)  {
-        filteredQueries = queries.filter {
-            $0.query.contains(text)
+        filteredQueries = queriesAndViewModel.filter {
+            $0.0.query.contains(text)
         }
     }
     
@@ -56,8 +58,8 @@ extension RecentQueriesViewModel {
     }
     
     func append(query: NewsQuery, newsListViewModel: NewsListViewModel) {
-        var reversedQueries = queries.reversed() as [NewsQuery]
-        reversedQueries.append(query)
-        queries = reversedQueries.reversed() as [NewsQuery]
+        var reversedQueries = queriesAndViewModel.reversed() as [(NewsQuery, NewsListViewModel)]
+        reversedQueries.append((query, newsListViewModel))
+        queriesAndViewModel = reversedQueries.reversed()  as [(NewsQuery, NewsListViewModel)]
     }
 }
