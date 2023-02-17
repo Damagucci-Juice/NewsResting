@@ -69,6 +69,14 @@ extension SearchViewController {
                 self.tableView.reloadData()
             }
         }
+        
+        recentQueriesViewModel.bindingTapped { [unowned self] searchTerm, newsResult in
+            Task {
+                let newsVC = NewsListViewController(newsListViewModel: newsResult)
+                newsVC.title = searchTerm.query
+                self.navigationController?.pushViewController(newsVC, animated: false)
+            }
+        }
     }
     
     private func setupNavigation() {
