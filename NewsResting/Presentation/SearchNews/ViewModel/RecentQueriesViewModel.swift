@@ -20,6 +20,8 @@ final class RecentQueriesViewModel {
         }
     }
     
+    private var onSearchTermTapped: (NewsQuery, NewsListViewModel) -> Void = { _, _  in }
+    
     private var onQueriesUpdated: () -> Void = { }
     
     private var onFilterUpdated: () -> Void = { }
@@ -57,9 +59,18 @@ extension RecentQueriesViewModel {
         onQueriesUpdated = completion
     }
     
+    func bindingTapped(completion: @escaping (NewsQuery, NewsListViewModel) -> Void) {
+        onSearchTermTapped = completion
+    }
+    
     func append(query: NewsQuery, newsListViewModel: NewsListViewModel) {
         var reversedQueries = queriesAndViewModel.reversed() as [(NewsQuery, NewsListViewModel)]
         reversedQueries.append((query, newsListViewModel))
         queriesAndViewModel = reversedQueries.reversed()  as [(NewsQuery, NewsListViewModel)]
+    }
+    
+    func cellTapped(_ offset: Int, isFiltered: Bool = false) {
+        let (query, viewModel) = isFiltered ? filteredQueries[offset] : queriesAndViewModel[offset]
+        onSearchTermTapped(query, viewModel)
     }
 }
