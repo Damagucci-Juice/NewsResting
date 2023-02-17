@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NewsQueryRepository {
-    func fetchRecentQuery(maxCount: Int) async throws -> [NewsQuery]
+    func fetchRecentQuery(maxCount: Int) async throws -> [(NewsQuery, NewsList)]
     @discardableResult
-    func saveQuery(query: NewsQuery) async throws -> NewsQuery
+    func saveQuery(query: NewsQuery, newsList: NewsList) async throws -> (NewsQuery, NewsList)
 }
