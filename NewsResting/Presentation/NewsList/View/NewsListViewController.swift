@@ -9,10 +9,10 @@ import UIKit
 
 final class NewsListViewController: UIViewController {
 
-    private let newsListViewModel: NewsListViewModel
+    private let viewModel: NewsListViewModel
     
     init(newsListViewModel: NewsListViewModel) {
-        self.newsListViewModel = newsListViewModel
+        self.viewModel = newsListViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,12 +59,12 @@ extension NewsListViewController {
 
 extension NewsListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.newsListViewModel.newsViewModel.count
+        self.viewModel.newsViewModel.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.reusableIdentifier, for: indexPath) as? NewsTableViewCell else { return UITableViewCell() }
-        let vm = newsListViewModel[indexPath.row]
+        let vm = viewModel[indexPath.row]
         cell.fill(vm)
         return cell
     }
