@@ -63,7 +63,25 @@ extension RecentQueriesViewModel {
         onSearchTermTapped = completion
     }
     
+    // TODO: - 먼가 판단로직, 수정로직, 여러개를 하는 듯한 느낌이 남.. 분리가능 할 듯
     func append(query: NewsQuery, newsListViewModel: NewsListViewModel) {
+        let isContain = queriesAndViewModel.contains { (existQuery, _) in
+            existQuery == query
+        }
+        guard isContain == false else {
+            //MARK: - 가지고 있는 경우에 가장 위로 올림
+            for i in 0..<queriesAndViewModel.count {
+                let existQuery = queriesAndViewModel[i].0
+                if existQuery == query {
+                    let removed = queriesAndViewModel.remove(at: i)
+                    queriesAndViewModel.insert(removed, at: 0)
+                    return
+                }
+            }
+            return
+            
+        }
+        //MARK: - 기존에 겹치지 않으면 추가
         var reversedQueries = queriesAndViewModel.reversed() as [(NewsQuery, NewsListViewModel)]
         reversedQueries.append((query, newsListViewModel))
         queriesAndViewModel = reversedQueries.reversed()  as [(NewsQuery, NewsListViewModel)]
