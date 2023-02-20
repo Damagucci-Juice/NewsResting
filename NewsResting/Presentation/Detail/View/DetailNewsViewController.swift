@@ -48,7 +48,7 @@ extension DetailNewsViewController {
         view.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.equalToSuperview().inset(15)
         }
         
