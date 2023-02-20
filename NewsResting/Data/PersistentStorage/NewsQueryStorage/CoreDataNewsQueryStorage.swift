@@ -20,6 +20,37 @@ final class CoreDataNewsQueryStorage {
 
 // MARK: Public
 extension CoreDataNewsQueryStorage: NewsQueryStorage {
+    
+    func fetchRelevantQueries(_ text: String, completion: @escaping ([(NewsQuery, NewsList)]?) -> Void) {
+        coreDataStorage.performBackgroundTask { context in
+            do {
+                let request: NSFetchRequest = NewsQueryEntity.fetchRequest()
+                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(NewsQueryEntity.createdAt),
+                                                            ascending: false)]
+                request.predicate = NSPredicate(format: "%K BEGINSWITH[cd] %@",
+                                                #keyPath(NewsQueryEntity.query),
+                                                text)
+                
+                let result = try context.fetch(request)
+                let newsQueries = result.map { queryEntity in
+                    queryEntity.toDomain()
+                }
+                let newsLists = result.compactMap { $0.response }.map { $0.toDomain() }
+                if newsQueries.count == newsLists.count {
+                    var tuple = [(NewsQuery, NewsList)]()
+                    for i in 0..<newsQueries.count {
+                        tuple.append((newsQueries[i], newsLists[i]))
+                    }
+                    completion(tuple)
+                } else {
+                    completion(nil)
+                }
+            } catch {
+                completion(nil)
+            }
+        }
+    }
+    
        
     //TODO: - 결과 타입 Result로 리펙터링
     func fetchRecentQuries(maxCount: Int, completion: @escaping ([(NewsQuery, NewsList)]?) -> Void) {
