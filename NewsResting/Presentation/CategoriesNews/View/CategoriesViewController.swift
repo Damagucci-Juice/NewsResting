@@ -115,6 +115,14 @@ extension CategoriesViewController: UITableViewDataSource, UITableViewDelegate {
         CategoriesViewModel.cellHeight
     }
  
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let newsItemViewModel = viewModel[indexPath.row] else { return }
+        let detailVC = DetailNewsViewController(newsItemViewModel: newsItemViewModel)
+        Task {
+            self.navigationController?.pushViewController(detailVC, animated: false)
+        }
+    }
+    
 }
 
 class CategoryViewItemCell: UITableViewCell {
