@@ -83,7 +83,7 @@ extension SearchViewController {
         navigationItem.searchController = searchController
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = "search term".localized()
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         navigationItem.hidesSearchBarWhenScrolling = false
     }
