@@ -21,10 +21,19 @@ extension ImageRequest: NetworkRequestable {
     }
     
     func excute() async throws -> Data {
-        guard let url = URL(string: imagePath)
+        guard let url = try? url()
         else { throw NetworkError.urlGeneration }
         let urlRequest = URLRequest(url: url)
         guard let data = try? await load(urlRequest) else { throw NetworkError.loadFailure }
         return data
+    }
+}
+
+extension ImageRequest {
+    private func url() throws -> URL {
+        let path = (imagePath.hasPrefix("http") || imagePath.hasPrefix("https")) ? imagePath : "https:" + imagePath
+        let koreaEncodedPath = path.makeKoreanEncoded()
+        guard let url =  URL(string: koreaEncodedPath) else { throw NetworkError.urlGeneration }
+        return url
     }
 }
