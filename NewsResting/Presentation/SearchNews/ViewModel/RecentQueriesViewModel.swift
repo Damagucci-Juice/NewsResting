@@ -46,8 +46,10 @@ extension RecentQueriesViewModel {
     }
     
     func filterQuries(_ text: String)  {
-        filteredQueries = queriesAndViewModel.filter {
-            $0.0.query.contains(text)
+        Task {
+            filteredQueries = try await fetchRecentQueriesUseCase.fetch(with: text).map { query, list in
+                return (query, list.toViewModel())
+            }
         }
     }
     
