@@ -11,4 +11,8 @@ extension String {
     func localized(comment: String = "") -> String {
         return NSLocalizedString(self, comment: comment)
     }
+    
+    func makeKoreanEncoded() -> String {
+        self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? self
+    }
 }
