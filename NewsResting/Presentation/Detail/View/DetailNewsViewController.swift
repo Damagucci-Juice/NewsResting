@@ -12,7 +12,7 @@ class DetailNewsViewController: UIViewController {
 
     private let viewModel: NewsItemViewModel
     private let imageRepository = ImageRepositoryImpl()
-    private var isFetchImageSussecc = true
+    private var isNotImageLoaded = true
     
     private lazy var imageView = UIImageView()
     private var imageViewHeight: Constraint?
@@ -34,11 +34,28 @@ class DetailNewsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - View Controller's life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
         setupAttribute()
         fillContents()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Timer.scheduledTimer(timeInterval: 1.5,
+                                 target: self,
+                                 selector: #selector(changeImageView),
+                                 userInfo: nil,
+                                 repeats: false)
+    }
+    
+    @objc
+    func changeImageView() {
+        if isNotImageLoaded {
+            closeImageView()
+        }
     }
 }
 
@@ -68,8 +85,8 @@ extension DetailNewsViewController {
     private func fillContents() {
         Task {
             if let imagePath = viewModel.imagePath {
-                let start = Date.timeIntervalSinceReferenceDate
                 let data = try await imageRepository.fetchImage(path: imagePath)
+                isNotImageLoaded = false
                 imageView.image = UIImage(data: data)
             } else {
                 //MARK: ImageView 조정
@@ -81,6 +98,8 @@ extension DetailNewsViewController {
     
     private func closeImageView() {
         self.imageViewHeight?.update(offset: 0)
-        view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.5) { [unowned self] in 
+            view.layoutIfNeeded()
+        }
     }
 }
