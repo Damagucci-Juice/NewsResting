@@ -58,11 +58,32 @@ extension CategoriesViewModel {
         currentSection = category
         onSectionUpdated()
     }
+    
+    func loadNextNews() async throws {
+        guard let category = currentSection,
+              let currentPage = pageOfSection[category]
+        else { return }
+            
+        let nextNewsList = try await useCase.getNextNews(category, page: currentPage + 1)
+        pageOfSection[category]? += 1
+        
+        append(nextNews: nextNewsList, at: category)
         onSectionUpdated()
     }
     
     //MARK: - Output
     func binding(completion: @escaping () -> Void) {
         onSectionUpdated = completion
+    }
+}
+
+
+//MARK: - Private
+extension CategoriesViewModel {
+    private func append(nextNews: NewsList, at category: NewsCategory) {
+        guard let existNewsListViewModel = categories[category] else { return }
+        let additionalNewsItemViewModels = nextNews.toViewModel().newsViewModel
+        let added = existNewsListViewModel.newsViewModel + additionalNewsItemViewModels
+        categories[category]?.newsViewModel = added
     }
 }
