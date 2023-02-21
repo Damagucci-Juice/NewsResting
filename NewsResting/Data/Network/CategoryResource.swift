@@ -27,7 +27,8 @@ extension CategoryResource: APIResource {
     var query: [String : String] {
         [
             "country": CategoryResource.defaultCountry,
-            "category": newsCategoryDTO.category
+            "category": newsCategoryDTO.category,
+            "page": "\(newsCategoryDTO.page)"
         ]
     }
     
