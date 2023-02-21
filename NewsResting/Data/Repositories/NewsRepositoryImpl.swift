@@ -20,8 +20,8 @@ final class NewsRepositoryImpl {
 //MARK: - Public
 extension NewsRepositoryImpl: NewsRepository {
     
-    func fetchNews(by category: NewsCategory) async throws -> NewsList {
-        let categoryRequestDTO = NewsCategoryDTO(category: category.text)
+    func fetchNews(by category: NewsCategory, page: Int) async throws -> NewsList {
+        let categoryRequestDTO = NewsCategoryDTO(category: category.text, page: page)
         
         if let cached = try? await responseCache.getCategoryResponse(categoryRequestDTO) {
             return cached
