@@ -37,8 +37,8 @@ extension NewsRepositoryImpl: NewsRepository {
     
     //TODO: - 두 펑션이 파라미터만 차이가 있지 사실상 하는일은 동일하여 중복되고 있음, 개선 방안이 있을까?
     //MARK: 쿼리를 이용해 뉴스 페치
-    func fetchNews(with query: NewsQuery) async throws -> NewsList {
-        let queryRequestDTO = NewsQueryDTO(query: query.query)
+    func fetchNews(with query: NewsQuery, page: Int) async throws -> NewsList {
+        let queryRequestDTO = NewsQueryDTO(query: query.query, page: page)
         
         if let cached = try? await responseCache.getSearchResponse(queryRequestDTO) {
             return cached

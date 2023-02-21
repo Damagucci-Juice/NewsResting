@@ -8,6 +8,6 @@
 import Foundation
 
 protocol NewsRepository {
-    func fetchNews(with query: NewsQuery) async throws -> NewsList
+    func fetchNews(with query: NewsQuery, page: Int) async throws -> NewsList
     func fetchNews(by category: NewsCategory, page: Int) async throws -> NewsList
 }
