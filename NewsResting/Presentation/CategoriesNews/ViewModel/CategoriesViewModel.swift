@@ -12,12 +12,12 @@ final class CategoriesViewModel {
     let useCase: FetchCategoriesUseCase
     private var categories: [NewsCategory: NewsListViewModel] = [:]
     
-    private(set) var currentSection: NewsListViewModel?
+    private(set) var currentSectionItems: NewsListViewModel?
     
     private var onSectionUpdated: () -> Void = { }
     
     var count: Int {
-        currentSection?.newsViewModel.count ?? 0
+        currentSectionItems?.newsViewModel.count ?? 0
     }
     
     init(useCase: FetchCategoriesUseCase) {
@@ -30,7 +30,7 @@ final class CategoriesViewModel {
 
 extension CategoriesViewModel {
     subscript(_ offset: Int) -> NewsItemViewModel? {
-        currentSection?.newsViewModel[offset]
+        currentSectionItems?.newsViewModel[offset]
     }
     
     func start() async throws {
@@ -49,7 +49,7 @@ extension CategoriesViewModel {
     //MARK: - Input
     func setSection(category: NewsCategory) {
         guard let selectedNewsListViewModel = categories[category] else { return }
-        currentSection = selectedNewsListViewModel
+        currentSectionItems = selectedNewsListViewModel
         onSectionUpdated()
     }
     
