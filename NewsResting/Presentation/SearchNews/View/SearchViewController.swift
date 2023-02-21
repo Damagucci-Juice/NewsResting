@@ -118,9 +118,13 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text else { return }
         Task {
-            let (query, viewModel) = try await searchNewsViewModel.fetchNewsListViewModel(searchTerm)
-            recentQueriesViewModel.append(query: query, newsListViewModel: viewModel)
-            self.navigationController?.pushViewController(NewsListViewController(newsListViewModel: viewModel), animated: true)
+            do {
+                let (query, viewModel) = try await searchNewsViewModel.fetchNewsListViewModel(searchTerm, page: 1)
+                recentQueriesViewModel.append(query: query, newsListViewModel: viewModel)
+                self.navigationController?.pushViewController(NewsListViewController(newsListViewModel: viewModel), animated: true)
+            } catch {
+                debugPrint("Fetching \(searchTerm) News failed")
+            }
         }
     }
 }
