@@ -7,13 +7,6 @@
 
 import Foundation
 
-//TODO: - 이 값들을 NewsQuery에 포함시켜야할지에 대한 의문
-struct SearchNewsRequestValue {
-    let query: NewsQuery
-    //let sortBy: 1. 최신순, 2. 유명 언론 순
-    //let from - to
-}
-
 protocol SearchNewsUseCase {
     func excute(query: NewsQuery) async throws -> NewsList
 }
