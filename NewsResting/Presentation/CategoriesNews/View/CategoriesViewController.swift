@@ -123,6 +123,14 @@ extension CategoriesViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    //MARK: - When scroll reached to bottom
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == viewModel.count {
+            Task {
+                try await viewModel.loadNextNews()
+            }
+        }
+    }
 }
 
 class CategoryViewItemCell: UITableViewCell {
