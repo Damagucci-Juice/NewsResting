@@ -146,8 +146,9 @@ extension CoreDataNewsResponseStorage {
     
     private func fetchRequest(categoryDTO: NewsCategoryDTO) -> NSFetchRequest<NewsCategoryEntity> {
         let request = NewsCategoryEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "%K = %@",
-                                        #keyPath(NewsCategoryEntity.category), categoryDTO.category
+        request.predicate = NSPredicate(format: "%K == %@ AND %K == %i" ,
+                                        #keyPath(NewsCategoryEntity.category), categoryDTO.category,
+                                        #keyPath(NewsCategoryEntity.page), categoryDTO.page
         )
         return request
     }
