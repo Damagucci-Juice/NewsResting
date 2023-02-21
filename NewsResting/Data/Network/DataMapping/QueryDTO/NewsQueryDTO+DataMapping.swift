@@ -10,6 +10,7 @@ import CoreData
 
 struct NewsQueryDTO: Encodable {
     let query: String
+    let page: Int
 }
 
 extension NewsQueryDTO: EntityConvertable {
