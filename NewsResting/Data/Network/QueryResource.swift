@@ -25,7 +25,10 @@ extension QueryResource: APIResource {
 
     //TODO: - 키와 벨류 사이엔 "=", 키와 키 사이엔 "&"
     var query: [String : String] {
-        ["q": self.newsQueryRequestDTO.query]
+        [
+            "q": newsQueryRequestDTO.query,
+            "page": "\(newsQueryRequestDTO.page)"
+        ]
     }
 
     var header: [String : String] {
