@@ -29,4 +29,8 @@ extension NewsListViewModel {
     var cellHeight: CGFloat {
         return 85
     }
+    
+    func append(newsItems: [NewsItemViewModel]) {
+        newsViewModel.append(contentsOf: newsItems)
+    }
 }
