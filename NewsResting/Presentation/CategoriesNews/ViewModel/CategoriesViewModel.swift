@@ -14,6 +14,7 @@ final class CategoriesViewModel {
     
     private(set) var currentSectionItems: NewsListViewModel?
     private(set) var currentSection: NewsCategory?
+    private(set) var pageOfSection: [NewsCategory: Int] = [:]
     
     private var onSectionUpdated: () -> Void = { }
     
@@ -23,6 +24,9 @@ final class CategoriesViewModel {
     
     init(useCase: FetchCategoriesUseCase) {
         self.useCase = useCase
+        NewsCategory.allCases.forEach { cateogry in
+            pageOfSection[cateogry] = 1
+        }
         Task {
             try await start()
         }
