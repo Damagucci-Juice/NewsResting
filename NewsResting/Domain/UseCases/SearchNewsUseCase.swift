@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SearchNewsUseCase {
-    func excute(query: NewsQuery) async throws -> NewsList
+    func excute(query: NewsQuery, page: Int) async throws -> NewsList
 }
 
 
@@ -21,9 +21,9 @@ final class SearchNewsUseCaseImpl {
 }
 
 extension SearchNewsUseCaseImpl: SearchNewsUseCase {
-    func excute(query: NewsQuery) async throws -> NewsList {
+    func excute(query: NewsQuery, page: Int) async throws -> NewsList {
         do {
-            let fetchedNewsList = try await newsRepository.fetchNews(with: query)
+            let fetchedNewsList = try await newsRepository.fetchNews(with: query, page: page)
             return fetchedNewsList
         } catch {
             throw NetworkError.searchFetchFailure(query)
