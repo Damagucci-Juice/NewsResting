@@ -10,6 +10,8 @@ import UIKit
 final class NewsListViewController: UIViewController {
 
     private let viewModel: NewsListViewModel
+    private var searchUseCase = SearchNewsUseCaseImpl(newsRepository: NewsRepositoryImpl(responseCache: CoreDataNewsResponseStorage()))
+    private var currentPage = 1
     
     init(newsListViewModel: NewsListViewModel) {
         self.viewModel = newsListViewModel
@@ -78,6 +80,24 @@ extension NewsListViewController: UITableViewDataSource, UITableViewDelegate {
         let detailVC = DetailNewsViewController(newsItemViewModel: newsItemViewModel)
         Task {
             self.navigationController?.pushViewController(detailVC, animated: false)
+        }
+    }
+    
+    //MARK: - When scroll reached to bottom
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let title = navigationItem.title,
+              indexPath.row + 1 == viewModel.count else { return }
+        Task {
+            let nextPage = currentPage + 1
+            do {
+                let newsList = try await searchUseCase.excute(query: NewsQuery(query: title), page: nextPage)
+                currentPage = nextPage
+                let additionalViewModel = newsList.toViewModel().newsViewModel
+                viewModel.append(newsItems: additionalViewModel)
+                tableView.reloadData()
+            } catch {
+                debugPrint("Fetching \(title)'s \(nextPage) failed")
+            }
         }
     }
 }
