@@ -13,6 +13,7 @@ final class CategoriesViewModel {
     private var categories: [NewsCategory: NewsListViewModel] = [:]
     
     private(set) var currentSectionItems: NewsListViewModel?
+    private(set) var currentSection: NewsCategory?
     
     private var onSectionUpdated: () -> Void = { }
     
@@ -50,6 +51,9 @@ extension CategoriesViewModel {
     func setSection(category: NewsCategory) {
         guard let selectedNewsListViewModel = categories[category] else { return }
         currentSectionItems = selectedNewsListViewModel
+        currentSection = category
+        onSectionUpdated()
+    }
         onSectionUpdated()
     }
     
