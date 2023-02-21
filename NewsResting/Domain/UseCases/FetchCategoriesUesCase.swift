@@ -42,4 +42,8 @@ extension FetchCategoriesUseCaseImpl: FetchCategoriesUseCase {
             return allNewsList
         }
     }
+    
+    func getNextNews(_ category: NewsCategory, page: Int) async throws -> NewsList {
+        try await newsRepository.fetchNews(by: category, page: page)
+    }
 }
