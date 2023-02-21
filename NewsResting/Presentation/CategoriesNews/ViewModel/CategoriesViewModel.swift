@@ -19,7 +19,7 @@ final class CategoriesViewModel {
     private var onSectionUpdated: () -> Void = { }
     
     var count: Int {
-        currentSectionItems?.newsViewModel.count ?? 0
+        currentSectionItems?.count ?? 0
     }
     
     init(useCase: FetchCategoriesUseCase) {
@@ -83,7 +83,6 @@ extension CategoriesViewModel {
     private func append(nextNews: NewsList, at category: NewsCategory) {
         guard let existNewsListViewModel = categories[category] else { return }
         let additionalNewsItemViewModels = nextNews.toViewModel().newsViewModel
-        let added = existNewsListViewModel.newsViewModel + additionalNewsItemViewModels
-        categories[category]?.newsViewModel = added
+        existNewsListViewModel.append(newsItems: additionalNewsItemViewModels)
     }
 }
