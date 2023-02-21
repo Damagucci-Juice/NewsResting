@@ -25,6 +25,7 @@
     </entity>
     <entity name="NewsQueryEntity" representedClassName="NewsQueryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="page" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="query" optional="YES" attributeType="String"/>
         <relationship name="response" maxCount="1" deletionRule="Cascade" destinationEntity="NewsListEntity" inverseName="request" inverseEntity="NewsListEntity"/>
     </entity>
