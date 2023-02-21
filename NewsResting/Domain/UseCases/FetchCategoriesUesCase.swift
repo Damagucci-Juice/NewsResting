@@ -9,6 +9,7 @@ import Foundation
 
 protocol FetchCategoriesUseCase {
     func excute() async throws -> [NewsCategory: NewsList]
+    func getNextNews(_ category: NewsCategory, page: Int) async throws -> NewsList
 }
 
 final class FetchCategoriesUseCaseImpl {
@@ -26,7 +27,7 @@ extension FetchCategoriesUseCaseImpl: FetchCategoriesUseCase {
             for category in NewsCategory.allCases {
                 taskGroup.addTask {
                     do {
-                        let newsList = try await self.newsRepository.fetchNews(by: category)
+                        let newsList = try await self.getNextNews(category, page: 1)
                         return (category, newsList)
                     } catch {
                         throw NetworkError.categoryFetchFailure(category)
