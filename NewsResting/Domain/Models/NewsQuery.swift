@@ -9,7 +9,18 @@ import Foundation
 import CoreData
 
 struct NewsQuery: Equatable {
+    
     let query: String
+    let detailSearchRequestValue: DetailSearchRequestValue?
+    
+    init(query: String, detailSearchRequestValue: DetailSearchRequestValue? = nil) {
+        self.query = query
+        self.detailSearchRequestValue = detailSearchRequestValue
+    }
+    
+    static func == (lhs: NewsQuery, rhs: NewsQuery) -> Bool {
+        lhs.query == rhs.query
+    }
 }
 
 extension NewsQuery: EntityConvertable {
