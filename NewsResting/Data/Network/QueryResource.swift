@@ -23,7 +23,6 @@ extension QueryResource: APIResource {
         "everything"
     }
 
-    //TODO: - 키와 벨류 사이엔 "=", 키와 키 사이엔 "&"
     var query: [String : String] {
         [
             "q": newsQueryRequestDTO.query,
