@@ -81,6 +81,11 @@ extension SearchViewController {
                 self.navigationController?.pushViewController(newsVC, animated: false)
             }
         }
+        
+        onDetailVCTappedDone = { [unowned self] value in
+            print("detail vc done")
+            self.detailSearchRequestValue = value
+        }
     }
     
     private func setupNavigation() {
