@@ -93,8 +93,24 @@ extension SearchViewController {
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = "search term".localized()
         navigationController?.navigationBar.prefersLargeTitles = false
-        
         navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.setRightBarButton(UIBarButtonItem.init(image: UIImage(systemName: "wrench.and.screwdriver"),
+                                                              style: .done,
+                                                              target: self,
+                                                              action: #selector(openSearchToolsViewController)), animated: false)
+    }
+    
+    @objc func openSearchToolsViewController() {
+        Task {
+            let searchToolVC = SearchToolViewController()
+            searchToolVC.bidnig(completion: onDetailVCTappedDone)
+            let navController = UINavigationController(rootViewController: searchToolVC)
+            navController.modalPresentationStyle = .formSheet
+            self.present(navController, animated: false)
+        }
+    }
+}
+
     }
 }
 
