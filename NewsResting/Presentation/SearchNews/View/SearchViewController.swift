@@ -11,6 +11,10 @@ import SnapKit
 
 
 class SearchViewController: UIViewController {
+    private var detailSearchRequestValue: DetailSearchRequestValue?
+    
+    private var onDetailVCTappedDone: (DetailSearchRequestValue) -> Void = { _ in }
+    
     private var searchNewsViewModel = SearchNewsViewModel(usecase: SearchNewsUseCaseImpl(newsRepository: NewsRepositoryImpl(responseCache: CoreDataNewsResponseStorage())))
     
     private var recentQueriesViewModel = RecentQueriesViewModel(fetchRecentQueriesUseCase: FetchRecentQueriesUseCaseImpl(queryRepository: NewsQueryRepositoryImpl(newsQueryStorage: CoreDataNewsQueryStorage())))
