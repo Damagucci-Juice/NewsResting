@@ -186,7 +186,8 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
         guard let searchTerm = searchBar.text else { return }
         Task {
             do {
-                let (query, viewModel) = try await searchNewsViewModel.fetchNewsListViewModel(searchTerm, page: 1)
+                let newsQuery = NewsQuery(query: searchTerm, detailSearchRequestValue: self.detailSearchRequestValue)
+                let (query, viewModel) = try await searchNewsViewModel.fetchNewsListViewModel(newsQuery, page: 1)
                 recentQueriesViewModel.append(query: query, newsListViewModel: viewModel)
                 let vc = NewsListViewController(newsListViewModel: viewModel)
                 vc.title = query.query
