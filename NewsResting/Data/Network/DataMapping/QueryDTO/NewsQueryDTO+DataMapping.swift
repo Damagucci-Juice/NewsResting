@@ -11,6 +11,23 @@ import CoreData
 struct NewsQueryDTO: Encodable {
     let query: String
     let page: Int
+    let detailRequestValue: DetailSearchRequestValue?
+    
+    init(newsQuery: NewsQuery, page: Int) {
+        self.query = newsQuery.query
+        self.page = page
+        self.detailRequestValue = newsQuery.detailSearchRequestValue
+    }
+    
+    func queryParameters() -> Dictionary<String, String> {
+        var dict = [String: String]()
+        dict = [
+            "q": self.query,
+            "page": "\(self.page)"
+        ]
+        guard let detailRequestValue else { return dict }
+        return detailRequestValue.queryParameters(in: dict)
+    }
 }
 
 extension NewsQueryDTO: EntityConvertable {
