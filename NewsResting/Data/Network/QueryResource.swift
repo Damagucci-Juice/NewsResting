@@ -24,10 +24,7 @@ extension QueryResource: APIResource {
     }
 
     var query: [String : String] {
-        [
-            "q": newsQueryRequestDTO.query,
-            "page": "\(newsQueryRequestDTO.page)"
-        ]
+        newsQueryRequestDTO.queryParameters()
     }
 
     var header: [String : String] {
