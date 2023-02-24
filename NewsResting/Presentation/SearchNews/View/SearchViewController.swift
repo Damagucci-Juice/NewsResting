@@ -106,7 +106,7 @@ extension SearchViewController {
             searchToolVC.bidnig(completion: onDetailVCTappedDone)
             let navController = UINavigationController(rootViewController: searchToolVC)
             navController.modalPresentationStyle = .formSheet
-            self.present(navController, animated: false)
+            self.present(navController, animated: true)
         }
     }
 }
