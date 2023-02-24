@@ -22,3 +22,10 @@
 "science" = "サイエンス";
 "sports" = "スポーツ";
 "technology" = "テクノロジー";
+
+//MARK: - 세부 사항 검색어
+"include searchTerm" = "包含検索語";
+"exclude searchTerm" = "除外検索語";
+"period" = "その間";
+"from" = "from";
+"to" = "to";
