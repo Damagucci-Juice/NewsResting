@@ -47,8 +47,8 @@ final class SearchToolViewController: UIViewController {
     
     private var minusButton: UIButton = {
         let button = UIButton()
+        button.tintColor = .red
         button.setImage(UIImage(systemName: "minus.circle.fill"), for: .normal)
-        button.setTitleColor(UIColor.red, for: .disabled)
         return button
     }()
     
