@@ -302,19 +302,24 @@ extension SearchToolViewController {
     }
     
     private func filterInvalidComponents(_ newCompos: [DateComponents]) -> [DateComponents] {
-        var newCompos = newCompos.sorted { $0.date! < $1.date! }
-        guard let selectedDays,
-              let existFirst = selectedDays.first?.date,
-              let existLast = selectedDays.last?.date else { return [] }
-        var isAllInclude = true
-        for compo in newCompos {
-            if let compoDate = compo.date, !(existFirst...existLast ~= compoDate) {
-                isAllInclude = false
-                break
+        var newCompos = newCompos.sorted { ($0.date ?? Date()) < ($1.date ?? Date()) }
+        let removeIndex = isInRange(newComponents: newCompos) ? 2 : 1
+        _ = newCompos.remove(at: removeIndex)
+        return newCompos
+    }
+    
+    private func isInRange(newComponents: [DateComponents]) -> Bool {
+        let selectedDates = self.selectedDays.compactMap { $0.date }
+        let startDate = selectedDates.first ?? Date()
+        let lastDate = selectedDates.last ?? Date()
+        let dates = newComponents.compactMap { $0.date }
+        
+        for date in dates {
+            if !(startDate...lastDate ~= date) {
+                return false
             }
         }
-        newCompos.remove(at: isAllInclude ? 2 : 1)
-        return newCompos
+        return true
     }
 }
 
