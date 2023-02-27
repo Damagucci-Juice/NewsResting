@@ -110,7 +110,7 @@ extension SearchViewController {
     
     @objc func openSearchToolsViewController() {
         Task {
-            let searchToolVC = SearchToolViewController()
+            let searchToolVC = SearchToolViewController(detailSearchRequestValue: detailSearchRequestValue)
             searchToolVC.bidnig(completion: onDetailVCTappedDone)
             let navController = UINavigationController(rootViewController: searchToolVC)
             navController.modalPresentationStyle = .formSheet
