@@ -83,7 +83,6 @@ extension SearchViewController {
         }
         
         onDetailVCTappedDone = { [unowned self] value in
-            print("detail vc done")
             self.detailSearchRequestValue = value
         }
     }
