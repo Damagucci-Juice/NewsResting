@@ -333,14 +333,13 @@ extension SearchToolViewController {
 
 extension SearchToolViewController: UICalendarSelectionMultiDateDelegate {
     func multiDateSelection(_ selection: UICalendarSelectionMultiDate, didSelectDate dateComponents: DateComponents) {
-        if selection.selectedDates.count == 2 {
-            self.selectedDays = selection.selectedDates.sorted { ($0.date ?? Date()) < ($1.date ?? Date()) }
+        if selection.selectedDates.count < 3 {
+            self.selectedDays = selection.selectedDates
+            return
         }
-        if selection.selectedDates.count == 3 {
-            let twoDates = filterInvalidComponents(selection.selectedDates)
-            selection.setSelectedDates(twoDates, animated: true)
-            self.selectedDays = twoDates
-        }
+        let twoDates = filterInvalidComponents(selection.selectedDates)
+        selection.setSelectedDates(twoDates, animated: true)
+        self.selectedDays = twoDates
     }
     
     func multiDateSelection(_ selection: UICalendarSelectionMultiDate, didDeselectDate dateComponents: DateComponents) { }
