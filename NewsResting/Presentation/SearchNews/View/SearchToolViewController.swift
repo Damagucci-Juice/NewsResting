@@ -114,6 +114,14 @@ final class SearchToolViewController: UIViewController {
 
 //MARK: - Private
 extension SearchToolViewController {
+    private func addSearchTermButton(_ text: String) -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.frame = .zero
+        button.setTitle(text, for: .normal)
+        button.layer.cornerRadius = 10
+        return button
+    }
     private func setupNavigation() {
         navigationItem.setRightBarButton(UIBarButtonItem(title: "Done",
                                                          style: .done,
@@ -189,19 +197,23 @@ extension SearchToolViewController {
             let alert = UIAlertController(title: "alert", message: "textField", preferredStyle: .alert)
             
             let ok = UIAlertAction(title: "OK", style: .default) {[unowned self] _ in
-                
-                let button = UIButton()
-                button.translatesAutoresizingMaskIntoConstraints = false
+                guard let includeText = alert.textFields?[0].text else { return }
+                let button = addSearchTermButton(includeText)
                 button.backgroundColor = .blue
-                button.frame = .zero
-                button.setTitle(alert.textFields?[0].text, for: .normal)
-                button.layer.cornerRadius = 10
-                button.addAction(UIAction(handler: { _ in
-                    Task {
-                        button.removeFromSuperview()
-                    }
-                }), for: .touchUpInside)
                 self.includeArea.addArrangedSubview(button)
+        minusButton.addAction(UIAction(handler: { _ in
+            let alert = UIAlertController(title: "alert", message: "textField", preferredStyle: .alert)
+            
+            let ok = UIAlertAction(title: "OK", style: .default) {[unowned self] _ in
+                guard let excludeText = alert.textFields?[0].text else { return }
+                let button = addSearchTermButton(excludeText)
+                button.addAction(UIAction(handler: { [unowned self] _ in
+                    button.removeFromSuperview()
+                    self.detailSearchRequestValue.excludeSearchTerms.removeAll { $0 == excludeText }
+                }), for: .touchUpInside)
+                button.backgroundColor = .red
+                self.excludeArea.addArrangedSubview(button)
+                self.detailSearchRequestValue.excludeSearchTerms.append(excludeText)
             }
             
             let cancel = UIAlertAction(title: "cancel", style: .cancel)
