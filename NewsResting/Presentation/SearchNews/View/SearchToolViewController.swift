@@ -105,6 +105,7 @@ final class SearchToolViewController: UIViewController {
     }
     
     @objc func injectToolViewModel() {
+        fillDetailRequestValue()
         onTappedDoneButton(detailSearchRequestValue)
         Task {
             self.dismiss(animated: true)
@@ -122,6 +123,23 @@ extension SearchToolViewController {
         button.layer.cornerRadius = 10
         return button
     }
+    
+    private func fillDetailRequestValue() {
+        switch selectedDays.count {
+        case 0:
+            detailSearchRequestValue.fromDateCompo = nil
+        case 1:
+            if let first = selectedDays.first {
+                detailSearchRequestValue.fromDateCompo = first
+            }
+        default: // 2
+            if let first = selectedDays.first, let last = selectedDays.last {
+                detailSearchRequestValue.fromDateCompo = first
+                detailSearchRequestValue.toDateCompo = last
+            }
+        }
+    }
+    
     private func setupNavigation() {
         navigationItem.setRightBarButton(UIBarButtonItem(title: "Done",
                                                          style: .done,
