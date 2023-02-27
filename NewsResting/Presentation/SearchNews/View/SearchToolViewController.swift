@@ -25,7 +25,7 @@ final class SearchToolViewController: UIViewController {
         let view = UIStackView()
         view.axis = .horizontal
         view.alignment = .center
-        view.distribution = .fill  // 이 상당히 야무진 이놈을 어떻게 하면 좋을까???
+        view.distribution = .fill
         view.spacing = 4
         view.backgroundColor = .systemGray6
         return view
