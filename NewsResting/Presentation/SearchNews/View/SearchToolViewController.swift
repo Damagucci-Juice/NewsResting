@@ -29,6 +29,15 @@ final class SearchToolViewController: UIViewController {
         return view
     }()
     
+    private let calendarView: UICalendarView = {
+        let calendarView = UICalendarView()
+        let gregorianCalendar = Calendar(identifier: .gregorian)
+        calendarView.calendar = gregorianCalendar
+        calendarView.locale = Locale.autoupdatingCurrent
+        calendarView.fontDesign = .rounded
+        return calendarView
+    }()
+    
     private var excludeArea: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -95,10 +104,11 @@ final class SearchToolViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .brown
         setupNavigation()
+        setupCalendar()
         setupLayout()
         setupAttribute()
     }
-        
+    
     @objc func injectToolViewModel() {
         onTappedDoneButton(detailSearchRequestValue)
         Task {
@@ -125,7 +135,8 @@ extension SearchToolViewController {
         [
             includeTerm, plusButton, includeArea,
             excludeTerm, minusButton, excludeArea,
-            periodLabel, fromButton, toButton
+            periodLabel, fromButton, toButton,
+            calendarView
         ].forEach { view in
             self.view.addSubview(view)
         }
@@ -179,6 +190,11 @@ extension SearchToolViewController {
         toButton.snp.makeConstraints { make in
             make.top.equalTo(fromButton)
             make.leading.equalTo(fromButton.snp.trailing).offset(constraintFromWall)
+        }
+        
+        calendarView.snp.makeConstraints { make in
+            make.top.equalTo(toButton.snp.bottom).offset(constraintFromWall)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(constraintFromWall)
         }
     }
     
