@@ -77,18 +77,6 @@ final class SearchToolViewController: UIViewController {
         return label
     }()
     
-//    private var fromButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("from".localized(), for: .normal)
-//        return button
-//    }()
-//
-//    private var toButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("to".localized(), for: .normal)
-//        return button
-//    }()
-    
     init(detailSearchRequestValue: DetailSearchRequestValue? = nil) {
         if let detailSearchRequestValue {
             self.detailSearchRequestValue = detailSearchRequestValue
