@@ -8,25 +8,25 @@
 import Foundation
 
 class DetailSearchRequestValue: Encodable {
-    var fromDate: Date?
-    var toDate:  Date?
-    var mustIncludeSearchTerm: String?
-    var excludeSearchTerm: String?
+    var fromDateCompo: DateComponents?
+    var toDateCompo:  DateComponents? = nil
+    var includeSearchTerms: [String] = []
+    var excludeSearchTerms: [String] = []
     
     func queryParameters(in dict: [String: String]) -> Dictionary<String, String> {
         var completedDict = dict
         // 여러개의 프로퍼티를 옵셔널 언랩핑하는 방법은 무엇일까?
-        if let fromDate, let toDate {
+        if let fromDate = fromDateCompo?.date, let toDate = toDateCompo?.date {
             completedDict["from"] = dateFormmater.string(from: fromDate)
             completedDict["to"] = dateFormmater.string(from: toDate)
-        } else if let fromDate {
+        } else if let fromDate = fromDateCompo?.date {
             completedDict["from"] = dateFormmater.string(from: fromDate)
         }
-        if let mustIncludeSearchTerm {
-            completedDict["q"] = (completedDict["q"] ?? "") + "+\(mustIncludeSearchTerm)"
+        if !includeSearchTerms.isEmpty {
+            completedDict["q"]? += "+\(includeSearchTerms.joined(separator: "+"))"
         }
-        if let excludeSearchTerm {
-            completedDict["q"] = (completedDict["q"] ?? "") + "-\(excludeSearchTerm)"
+        if !excludeSearchTerms.isEmpty {
+            completedDict["q"]? += "-\(excludeSearchTerms.joined(separator: "-"))"
         }
         return completedDict
     }
