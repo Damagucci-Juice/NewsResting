@@ -284,20 +284,21 @@ extension SearchToolViewController {
         
     }
     
-    func setupCalendar() {
-        ///delegate
+    private func setupCalendar() {
+        // if has values, draw at calendar
+        if let start = detailSearchRequestValue.fromDateCompo, let end = detailSearchRequestValue.toDateCompo {
+            self.selectedDays = [start, end]
+        } else if let start = detailSearchRequestValue.fromDateCompo {
+            self.selectedDays = [start]
+        }
+        /// delegate
         let dateSelection = UICalendarSelectionMultiDate(delegate: self)
+        dateSelection.selectedDates = self.selectedDays
         calendarView.selectionBehavior = dateSelection
-        //        calendarView.delegate = self
         
         /// available range
         let calendarViewDateRange = DateInterval(start: .distantPast, end: .now)
         calendarView.availableDateRange = calendarViewDateRange
-        
-        /// default date
-//        let now = Date()
-//        let compos = Calendar.current.dateComponents([.year, .month, .day], from: now)
-//        calendarView.visibleDateComponents = compos
     }
     
     private func filterInvalidComponents(_ newCompos: [DateComponents]) -> [DateComponents] {
