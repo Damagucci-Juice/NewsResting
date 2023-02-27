@@ -236,6 +236,21 @@ extension SearchToolViewController {
                 let button = addSearchTermButton(includeText)
                 button.backgroundColor = .blue
                 self.includeArea.addArrangedSubview(button)
+                self.detailSearchRequestValue.includeSearchTerms.append(includeText)
+            }
+            
+            let cancel = UIAlertAction(title: "cancel", style: .cancel)
+            alert.addTextField { textField in
+                textField.placeholder = "검색어를 입력하세요."
+            }
+            
+            alert.addAction(cancel)
+            
+            alert.addAction(ok)
+            
+            self.present(alert, animated: true, completion: nil)
+        }), for: .touchUpInside)
+        
         minusButton.addAction(UIAction(handler: { _ in
             let alert = UIAlertController(title: "alert", message: "textField", preferredStyle: .alert)
             
