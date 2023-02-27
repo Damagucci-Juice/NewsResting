@@ -94,6 +94,7 @@ final class SearchToolViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View Controller's life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .brown
