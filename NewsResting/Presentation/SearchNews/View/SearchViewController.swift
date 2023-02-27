@@ -11,7 +11,15 @@ import SnapKit
 
 
 class SearchViewController: UIViewController {
-    private var detailSearchRequestValue: DetailSearchRequestValue?
+    private var detailSearchRequestValue: DetailSearchRequestValue? = nil {
+        didSet {
+            let image = detailSearchRequestValue == nil
+            ? UIImage(systemName: "wrench.and.screwdriver")
+            : UIImage(systemName: "wrench.and.screwdriver.fill")
+            navigationItem.rightBarButtonItem?.image = image
+            navigationItem.rightBarButtonItem?.tintColor = detailSearchRequestValue == nil ? .tintColor : .green
+        }
+    }
     
     private var onDetailVCTappedDone: (DetailSearchRequestValue) -> Void = { _ in }
     
