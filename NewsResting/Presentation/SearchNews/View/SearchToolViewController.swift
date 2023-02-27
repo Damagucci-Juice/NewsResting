@@ -209,8 +209,25 @@ extension SearchToolViewController {
     }
     
     private func setupAttribute() {
+        [includeArea, excludeArea].forEach { stackView in
+            stackView.subviews.forEach { view in
+                stackView.removeArrangedSubview(view)
+            }
+        }
         
+        detailSearchRequestValue.includeSearchTerms.forEach { includeText in
+            let button = addSearchTermButton(includeText)
+            button.backgroundColor = .blue
+            self.includeArea.addArrangedSubview(button)
+        }
         
+        detailSearchRequestValue.excludeSearchTerms.forEach { excludeText in
+            let button = addSearchTermButton(excludeText)
+            button.backgroundColor = .red
+            self.excludeArea.addArrangedSubview(button)
+        }
+        
+        //TODO: - refactor plus, minus overlap
         plusButton.addAction(UIAction(handler: { _ in
             let alert = UIAlertController(title: "alert", message: "textField", preferredStyle: .alert)
             
