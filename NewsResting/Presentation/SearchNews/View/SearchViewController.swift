@@ -101,7 +101,7 @@ extension SearchViewController {
         navigationItem.title = "search term".localized()
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.setRightBarButton(UIBarButtonItem.init(image: UIImage(systemName: "wrench.and.screwdriver"),
+        navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(systemName: "wrench.and.screwdriver"),
                                                               style: .done,
                                                               target: self,
                                                               action: #selector(openSearchToolsViewController)), animated: false)
