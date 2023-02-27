@@ -77,17 +77,17 @@ final class SearchToolViewController: UIViewController {
         return label
     }()
     
-    private var fromButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("from".localized(), for: .normal)
-        return button
-    }()
-    
-    private var toButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("to".localized(), for: .normal)
-        return button
-    }()
+//    private var fromButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("from".localized(), for: .normal)
+//        return button
+//    }()
+//
+//    private var toButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("to".localized(), for: .normal)
+//        return button
+//    }()
     
     init(detailSearchRequestValue: DetailSearchRequestValue? = nil) {
         if let detailSearchRequestValue {
@@ -137,8 +137,7 @@ extension SearchToolViewController {
         [
             includeTerm, plusButton, includeArea,
             excludeTerm, minusButton, excludeArea,
-            periodLabel, fromButton, toButton,
-            calendarView
+            periodLabel, calendarView
         ].forEach { view in
             self.view.addSubview(view)
         }
@@ -184,18 +183,8 @@ extension SearchToolViewController {
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(constraintFromWall)
         }
         
-        fromButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(constraintFromWall)
-            make.top.equalTo(periodLabel.snp.bottom).offset(constraintFromWall)
-        }
-        
-        toButton.snp.makeConstraints { make in
-            make.top.equalTo(fromButton)
-            make.leading.equalTo(fromButton.snp.trailing).offset(constraintFromWall)
-        }
-        
         calendarView.snp.makeConstraints { make in
-            make.top.equalTo(toButton.snp.bottom).offset(constraintFromWall)
+            make.top.equalTo(periodLabel.snp.bottom).offset(constraintFromWall)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(constraintFromWall)
         }
     }
@@ -232,14 +221,6 @@ extension SearchToolViewController {
             alert.addAction(ok)
             
             self.present(alert, animated: true, completion: nil)
-        }), for: .touchUpInside)
-        
-        fromButton.addAction(UIAction(handler: { _ in
-            print("from button tapped")
-        }), for: .touchUpInside)
-        
-        toButton.addAction(UIAction(handler: { _ in
-            print("To button tapped")
         }), for: .touchUpInside)
         
         [includeArea, excludeArea].forEach { area in
