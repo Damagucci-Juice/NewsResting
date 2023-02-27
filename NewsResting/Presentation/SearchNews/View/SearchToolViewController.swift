@@ -12,7 +12,11 @@ final class SearchToolViewController: UIViewController {
     private var onTappedDoneButton: (DetailSearchRequestValue) -> Void = { _ in }
     private var detailSearchRequestValue: DetailSearchRequestValue
     
-    private var selectedDays: [DateComponents]?
+    private var selectedDays: [DateComponents] = [] {
+        didSet {
+            selectedDays = selectedDays.sorted { ($0.date ?? Date()) < ($1.date ?? Date()) }
+        }
+    }
     
     private var includeTerm: UILabel = {
         let label = UILabel()
