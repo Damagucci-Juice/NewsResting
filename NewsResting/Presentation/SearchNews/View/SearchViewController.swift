@@ -54,6 +54,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     private func refrashSearchController() {
         searchController?.isActive = false
+        detailSearchRequestValue = nil 
     }
     
     private func setupLayout() {
