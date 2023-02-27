@@ -12,6 +12,8 @@ final class SearchToolViewController: UIViewController {
     private var onTappedDoneButton: (DetailSearchRequestValue) -> Void = { _ in }
     private var detailSearchRequestValue: DetailSearchRequestValue
     
+    private var selectedDays: [DateComponents]?
+    
     private var includeTerm: UILabel = {
         let label = UILabel()
         label.text = "include searchTerm".localized()
@@ -262,6 +264,20 @@ extension SearchToolViewController {
 //        calendarView.visibleDateComponents = compos
     }
     
+    private func filterInvalidComponents(_ newCompos: [DateComponents]) -> [DateComponents] {
+        var newCompos = newCompos.sorted { $0.date! < $1.date! }
+        guard let selectedDays,
+              let existFirst = selectedDays.first?.date,
+              let existLast = selectedDays.last?.date else { return [] }
+        var isAllInclude = true
+        for compo in newCompos {
+            if let compoDate = compo.date, !(existFirst...existLast ~= compoDate) {
+                isAllInclude = false
+                break
+            }
+        }
+        newCompos.remove(at: isAllInclude ? 2 : 1)
+        return newCompos
     }
 }
 
@@ -271,4 +287,19 @@ extension SearchToolViewController {
     func bidnig(completion: @escaping (DetailSearchRequestValue) -> Void) {
         onTappedDoneButton = completion
     }
+}
+
+extension SearchToolViewController: UICalendarSelectionMultiDateDelegate {
+    func multiDateSelection(_ selection: UICalendarSelectionMultiDate, didSelectDate dateComponents: DateComponents) {
+        if selection.selectedDates.count == 2 {
+            self.selectedDays = selection.selectedDates.sorted { ($0.date ?? Date()) < ($1.date ?? Date()) }
+        }
+        if selection.selectedDates.count == 3 {
+            let twoDates = filterInvalidComponents(selection.selectedDates)
+            selection.setSelectedDates(twoDates, animated: true)
+            self.selectedDays = twoDates
+        }
+    }
+    
+    func multiDateSelection(_ selection: UICalendarSelectionMultiDate, didDeselectDate dateComponents: DateComponents) { }
 }
