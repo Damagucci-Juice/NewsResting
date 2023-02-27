@@ -39,8 +39,8 @@ extension NewsRepositoryImpl: NewsRepository {
     //MARK: 쿼리를 이용해 뉴스 페치
     func fetchNews(with query: NewsQuery, page: Int) async throws -> NewsList {
         let queryRequestDTO = NewsQueryDTO(newsQuery: query, page: page)
-        
-        if let cached = try? await responseCache.getSearchResponse(queryRequestDTO) {
+        if query.detailSearchRequestValue != nil,
+           let cached = try? await responseCache.getSearchResponse(queryRequestDTO) {
             return cached
         }
         
