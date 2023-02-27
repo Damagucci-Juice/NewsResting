@@ -244,7 +244,24 @@ extension SearchToolViewController {
             area.layer.cornerRadius = 10
         }
         
+    }
+    
+    func setupCalendar() {
+        ///delegate
+        let dateSelection = UICalendarSelectionMultiDate(delegate: self)
+        calendarView.selectionBehavior = dateSelection
+        //        calendarView.delegate = self
         
+        /// available range
+        let calendarViewDateRange = DateInterval(start: .distantPast, end: .now)
+        calendarView.availableDateRange = calendarViewDateRange
+        
+        /// default date
+//        let now = Date()
+//        let compos = Calendar.current.dateComponents([.year, .month, .day], from: now)
+//        calendarView.visibleDateComponents = compos
+    }
+    
     }
 }
 
